@@ -89,6 +89,32 @@ const protesisImages = [
   './assets/protesis-6.png'
 ];
 
+function resolveAssetUrl(src) {
+  try {
+    return new URL(src, window.location.href).href;
+  } catch {
+    return src;
+  }
+}
+
+/** Puts the clicked thumbnail first, then the rest of the gallery without duplicates. */
+function orderedGalleryWithClickedFirst(clickedSrc, gallery) {
+  const list = [...gallery];
+  if (!clickedSrc) return list;
+  const clickedResolved = resolveAssetUrl(clickedSrc);
+  let matchIndex = -1;
+  for (let i = 0; i < list.length; i++) {
+    if (resolveAssetUrl(list[i]) === clickedResolved) {
+      matchIndex = i;
+      break;
+    }
+  }
+  if (matchIndex === -1) {
+    return [clickedSrc, ...list];
+  }
+  return [...list.slice(matchIndex), ...list.slice(0, matchIndex)];
+}
+
 function showLabImage(index) {
   if (!activeGalleryImages.length) return;
   currentLabImageIndex = (index + activeGalleryImages.length) % activeGalleryImages.length;
@@ -121,7 +147,12 @@ if (
     labMainItem.addEventListener('click', () => openLabLightbox(0, labImages));
   }
   if (protesisMainItem) {
-    protesisMainItem.addEventListener('click', () => openLabLightbox(0, protesisImages));
+    protesisMainItem.addEventListener('click', () => {
+      const thumb = protesisMainItem.querySelector('img');
+      const clickedSrc = thumb ? thumb.currentSrc || thumb.src : '';
+      const ordered = orderedGalleryWithClickedFirst(clickedSrc, protesisImages);
+      openLabLightbox(0, ordered);
+    });
   }
   labLightboxClose.addEventListener('click', closeLabLightbox);
   labLightboxPrev.addEventListener('click', () => showLabImage(currentLabImageIndex - 1));
