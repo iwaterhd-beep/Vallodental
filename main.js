@@ -73,20 +73,20 @@ const labLightboxPrev = document.getElementById('labLightboxPrev');
 const labLightboxNext = document.getElementById('labLightboxNext');
 
 const labImages = [
-  'file:///C:/Users/PC/.cursor/projects/c-Users-PC-Desktop-files/assets/c__Users_PC_AppData_Roaming_Cursor_User_workspaceStorage_47f34203cd3ca9fa32f2f09f88665887_images_ChatGPT_Image_28_abr_2026__21_48_07-66dca1b9-38b2-475c-b9af-bd589b2095e5.png',
-  'file:///C:/Users/PC/.cursor/projects/c-Users-PC-Desktop-files/assets/c__Users_PC_AppData_Roaming_Cursor_User_workspaceStorage_47f34203cd3ca9fa32f2f09f88665887_images_ChatGPT_Image_28_abr_2026__22_04_46-bbb9db3a-ba7d-42fc-8533-50319eb2a060.png',
-  'file:///C:/Users/PC/.cursor/projects/c-Users-PC-Desktop-files/assets/c__Users_PC_AppData_Roaming_Cursor_User_workspaceStorage_47f34203cd3ca9fa32f2f09f88665887_images_ChatGPT_Image_28_abr_2026__21_43_00-47839a83-fc38-4ac6-804c-87acfc36f775.png'
+  './assets/lab-1.png',
+  './assets/lab-2.png',
+  './assets/lab-3.png'
 ];
 let currentLabImageIndex = 0;
 let activeGalleryImages = labImages;
 
 const protesisImages = [
-  'file:///C:/Users/PC/.cursor/projects/c-Users-PC-Desktop-files/assets/c__Users_PC_AppData_Roaming_Cursor_User_workspaceStorage_47f34203cd3ca9fa32f2f09f88665887_images_IMG_E8667-984e42ca-e75e-463d-9566-726066388206.png',
-  'file:///C:/Users/PC/.cursor/projects/c-Users-PC-Desktop-files/assets/c__Users_PC_AppData_Roaming_Cursor_User_workspaceStorage_47f34203cd3ca9fa32f2f09f88665887_images_IMG_E8668-191f084b-6ad9-4aa4-9f4a-a06b682c8329.png',
-  'file:///C:/Users/PC/.cursor/projects/c-Users-PC-Desktop-files/assets/c__Users_PC_AppData_Roaming_Cursor_User_workspaceStorage_47f34203cd3ca9fa32f2f09f88665887_images_IMG_8673-4e36a020-2363-4276-bf06-38615bed86af.png',
-  'file:///C:/Users/PC/.cursor/projects/c-Users-PC-Desktop-files/assets/c__Users_PC_AppData_Roaming_Cursor_User_workspaceStorage_47f34203cd3ca9fa32f2f09f88665887_images_IMG_E8665-11eb891c-3501-40ed-a30c-ec8b7b03fb35.png',
-  'file:///C:/Users/PC/.cursor/projects/c-Users-PC-Desktop-files/assets/c__Users_PC_AppData_Roaming_Cursor_User_workspaceStorage_47f34203cd3ca9fa32f2f09f88665887_images_IMG_8675-af9fe16f-2b54-4aef-8cb8-5ed92a37a81e.png',
-  'file:///C:/Users/PC/.cursor/projects/c-Users-PC-Desktop-files/assets/c__Users_PC_AppData_Roaming_Cursor_User_workspaceStorage_47f34203cd3ca9fa32f2f09f88665887_images_IMG_8674-7e4e13ef-168a-4995-8fcf-e5bf32824bdf.png'
+  './assets/protesis-1.png',
+  './assets/protesis-2.png',
+  './assets/protesis-3.png',
+  './assets/protesis-4.png',
+  './assets/protesis-5.png',
+  './assets/protesis-6.png'
 ];
 
 function showLabImage(index) {
