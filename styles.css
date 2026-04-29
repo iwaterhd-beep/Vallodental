@@ -567,6 +567,13 @@ nav.scrolled {
   transition: opacity 0.3s;
 }
 .service-card:hover .service-icon { opacity: 1; }
+.service-icon-protesis {
+  width: 54px;
+  height: 54px;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.95;
+}
 
 .service-name {
   font-family: var(--font-display);
