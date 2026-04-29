@@ -588,6 +588,13 @@ nav.scrolled {
   object-position: center;
   opacity: 0.95;
 }
+.service-icon-retenedores {
+  width: 70px;
+  height: 62px;
+  object-fit: contain;
+  object-position: center;
+  opacity: 0.95;
+}
 
 .service-name {
   font-family: var(--font-display);
