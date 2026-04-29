@@ -568,8 +568,8 @@ nav.scrolled {
 }
 .service-card:hover .service-icon { opacity: 1; }
 .service-icon-protesis {
-  width: 64px;
-  height: 56px;
+  width: 70px;
+  height: 62px;
   object-fit: cover;
   object-position: center;
   opacity: 0.95;
