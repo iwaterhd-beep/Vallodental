@@ -187,8 +187,8 @@ if (
       return;
     }
     const scrolledPast = Math.max(0, -rect.top);
-    const rate = 0.42;
-    const maxShift = 140;
+    const rate = 0.62;
+    const maxShift = 260;
     const shift = Math.min(maxShift, scrolledPast * rate);
     heroLeft.style.transform = `translate3d(0, ${shift}px, 0)`;
   }
