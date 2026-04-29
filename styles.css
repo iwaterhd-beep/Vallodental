@@ -180,7 +180,7 @@ nav.scrolled {
   justify-content: flex-start;
   align-items: center;
   text-align: center;
-  padding: 40px 56px 80px 56px;
+  padding: 80px 56px 80px 56px;
   position: relative;
   z-index: 2;
 }
@@ -1212,7 +1212,7 @@ footer {
 @media (max-width: 900px) {
   #hero { grid-template-columns: 1fr; }
   .hero-right { min-height: 400px; }
-  .hero-left { padding: 40px 32px 48px 32px; }
+  .hero-left { padding: 64px 32px 48px 32px; }
   nav { padding: 0 24px; }
   .nav-links { display: none; }
   .stat-item { padding: 28px 32px; }
