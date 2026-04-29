@@ -177,8 +177,10 @@ nav.scrolled {
 .hero-left {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 80px 64px 80px 80px;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  padding: 40px 56px 80px 56px;
   position: relative;
   z-index: 2;
 }
@@ -186,8 +188,10 @@ nav.scrolled {
 .hero-eyebrow {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 14px;
   margin-bottom: 32px;
+  width: 100%;
   opacity: 0;
   animation: fadeUp 0.9s var(--ease) 0.2s forwards;
 }
@@ -224,6 +228,8 @@ nav.scrolled {
   line-height: 1.8;
   color: var(--text-muted);
   max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
   margin-bottom: 48px;
   opacity: 0;
   animation: fadeUp 0.9s var(--ease) 0.5s forwards;
@@ -232,7 +238,10 @@ nav.scrolled {
 .hero-actions {
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 24px;
+  width: 100%;
   opacity: 0;
   animation: fadeUp 0.9s var(--ease) 0.65s forwards;
 }
@@ -1203,7 +1212,7 @@ footer {
 @media (max-width: 900px) {
   #hero { grid-template-columns: 1fr; }
   .hero-right { min-height: 400px; }
-  .hero-left { padding: 60px 32px; }
+  .hero-left { padding: 40px 32px 48px 32px; }
   nav { padding: 0 24px; }
   .nav-links { display: none; }
   .stat-item { padding: 28px 32px; }
