@@ -183,6 +183,7 @@ nav.scrolled {
   padding: 120px 64px 80px 80px;
   position: relative;
   z-index: 2;
+  will-change: transform;
 }
 
 .hero-eyebrow {

@@ -169,3 +169,41 @@ if (
     if (e.key === 'ArrowRight') showLabImage(currentLabImageIndex + 1);
   });
 }
+
+// ─── HERO — texto que baja al hacer scroll ────────────────────
+(function heroTextFollowScroll() {
+  const hero = document.getElementById('hero');
+  const heroLeft = document.querySelector('.hero-left');
+  if (!hero || !heroLeft) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  let ticking = false;
+
+  function updateHeroShift() {
+    const rect = hero.getBoundingClientRect();
+    if (rect.bottom <= 0 || rect.top >= window.innerHeight) {
+      heroLeft.style.transform = '';
+      return;
+    }
+    const scrolledPast = Math.max(0, -rect.top);
+    const rate = 0.42;
+    const maxShift = 140;
+    const shift = Math.min(maxShift, scrolledPast * rate);
+    heroLeft.style.transform = `translate3d(0, ${shift}px, 0)`;
+  }
+
+  function onScroll() {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        updateHeroShift();
+      });
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', updateHeroShift);
+  updateHeroShift();
+})();
