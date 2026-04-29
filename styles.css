@@ -570,7 +570,7 @@ nav.scrolled {
 .service-icon-protesis {
   width: 70px;
   height: 62px;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
   opacity: 0.95;
 }
