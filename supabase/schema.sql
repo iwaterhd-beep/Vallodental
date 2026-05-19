@@ -46,6 +46,14 @@ create table if not exists public.media_assets (
   created_at timestamptz not null default now()
 );
 
+create table if not exists public.gallery_groups (
+  id text primary key,
+  label text not null,
+  sort_order int not null default 99,
+  layout text not null default 'normal',
+  created_at timestamptz not null default now()
+);
+
 create table if not exists public.change_logs (
   id uuid primary key default gen_random_uuid(),
   entity_type text not null,
@@ -58,6 +66,7 @@ alter table public.admin_users enable row level security;
 alter table public.content_entries enable row level security;
 alter table public.services enable row level security;
 alter table public.media_assets enable row level security;
+alter table public.gallery_groups enable row level security;
 alter table public.change_logs enable row level security;
 
 drop policy if exists "admins read admin users" on public.admin_users;
@@ -88,6 +97,15 @@ for select using (true);
 
 drop policy if exists "admins manage media" on public.media_assets;
 create policy "admins manage media" on public.media_assets
+for all using (exists (select 1 from public.admin_users a where a.user_id = auth.uid()))
+with check (exists (select 1 from public.admin_users a where a.user_id = auth.uid()));
+
+drop policy if exists "public read gallery groups" on public.gallery_groups;
+create policy "public read gallery groups" on public.gallery_groups
+for select using (true);
+
+drop policy if exists "admins manage gallery groups" on public.gallery_groups;
+create policy "admins manage gallery groups" on public.gallery_groups
 for all using (exists (select 1 from public.admin_users a where a.user_id = auth.uid()))
 with check (exists (select 1 from public.admin_users a where a.user_id = auth.uid()));
 
@@ -207,9 +225,21 @@ values
 ('Prótesis fija','Detalle de prótesis dental','/assets/protesis-1.png',null,'public','image','protesis',true,1),
 ('Prótesis fija 2','Detalle de prótesis dental','/assets/protesis-2.png',null,'public','image','protesis',false,2),
 ('Prótesis fija 3','Detalle de prótesis dental','/assets/protesis-3.png',null,'public','image','protesis',false,3),
-('Diseño 3D','Diseño e impresión 3D dental','https://static.wixstatic.com/media/aca030_1546d01a94e94f3a8bf4ea0d0ed2d7b2~mv2.jpg',null,'external','image','general',false,1),
-('Estética dental','Trabajos de estética dental','https://static.wixstatic.com/media/aca030_7c5b259dce80487da7dd64ee897cb7ca~mv2.png',null,'external','image','general',false,2)
+('Diseño 3D','Diseño e impresión 3D dental','https://static.wixstatic.com/media/aca030_1546d01a94e94f3a8bf4ea0d0ed2d7b2~mv2.jpg',null,'external','image','diseno-3d',true,1),
+('Estética dental','Trabajos de estética dental','https://static.wixstatic.com/media/aca030_7c5b259dce80487da7dd64ee897cb7ca~mv2.png',null,'external','image','estetica-dental',true,1)
 on conflict do nothing;
+
+insert into public.gallery_groups (id, label, sort_order, layout)
+values
+  ('laboratorio', 'Laboratorio', 1, 'tall'),
+  ('protesis', 'Prótesis fija', 2, 'normal'),
+  ('diseno-3d', 'Diseño 3D', 3, 'normal'),
+  ('estetica-dental', 'Estética dental', 4, 'wide'),
+  ('general', 'General', 99, 'normal')
+on conflict (id) do update set
+  label = excluded.label,
+  sort_order = excluded.sort_order,
+  layout = excluded.layout;
 
 -- Después de crear un usuario en Supabase Auth, conviértelo en admin:
 -- insert into public.admin_users (user_id, full_name, role)

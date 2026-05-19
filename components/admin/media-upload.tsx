@@ -3,10 +3,12 @@
 import { useEffect, useState } from "react";
 import { UploadCloud } from "lucide-react";
 import { uploadMediaAction } from "@/lib/actions/admin";
+import { GalleryGroupSelect } from "@/components/admin/gallery-group-select";
+import type { GalleryGroup } from "@/lib/gallery-groups.shared";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-export function MediaUpload() {
+export function MediaUpload({ groups }: { groups: GalleryGroup[] }) {
   const [preview, setPreview] = useState<string | null>(null);
   const [fileName, setFileName] = useState("");
   const [title, setTitle] = useState("");
@@ -57,15 +59,7 @@ export function MediaUpload() {
         <Input name="alt" placeholder="Texto alternativo SEO" />
       </div>
       <div className="grid gap-3 md:grid-cols-[1fr_120px_160px]">
-        <select
-          className="h-10 rounded-md border border-input bg-background/80 px-3 text-sm"
-          name="gallery_group"
-          defaultValue="laboratorio"
-        >
-          <option value="laboratorio">Laboratorio</option>
-          <option value="protesis">Prótesis</option>
-          <option value="general">General</option>
-        </select>
+        <GalleryGroupSelect groups={groups} name="gallery_group" defaultValue="laboratorio" />
         <Input name="sort_order" placeholder="Orden" type="number" defaultValue={99} />
         <label className="flex items-center gap-2 rounded-md border border-input bg-background/80 px-3 text-sm text-muted-foreground">
           <input name="is_featured" type="checkbox" />

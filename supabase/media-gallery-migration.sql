@@ -31,11 +31,13 @@ set gallery_group = 'protesis',
 where title = 'Prótesis fija' or url like '%protesis-1%';
 
 update public.media_assets
-set gallery_group = 'general',
+set gallery_group = 'diseno-3d',
+    is_featured = true,
     sort_order = 1
 where title = 'Diseño 3D';
 
 update public.media_assets
-set gallery_group = 'general',
-    sort_order = 2
+set gallery_group = 'estetica-dental',
+    is_featured = true,
+    sort_order = 1
 where title = 'Estética dental';

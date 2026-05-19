@@ -5,7 +5,28 @@ import { redirect } from "next/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { createSupabaseServiceClient } from "@/lib/supabase/service";
 import { requireAdmin } from "@/lib/auth";
+import { humanizeGalleryGroupId } from "@/lib/gallery-groups.shared";
 import { slugify } from "@/lib/utils";
+
+async function ensureGalleryGroup(
+  client: ReturnType<typeof createSupabaseServiceClient>,
+  id: string,
+  label: string
+) {
+  await client.from("gallery_groups").upsert(
+    { id, label, sort_order: 50, layout: "normal" },
+    { onConflict: "id" }
+  );
+}
+
+function resolveGalleryGroupFromForm(formData: FormData, fieldName = "gallery_group") {
+  const newLabel = String(formData.get("gallery_group_new_label") ?? "").trim();
+  const selected = String(formData.get(fieldName) ?? "general");
+  if (newLabel) {
+    return { id: slugify(newLabel), label: newLabel };
+  }
+  return { id: selected, label: humanizeGalleryGroupId(selected) };
+}
 
 async function logChange(entityType: string, entityLabel: string, action: string) {
   const supabase = createSupabaseServerClient();
@@ -157,9 +178,11 @@ export async function uploadMediaAction(formData: FormData) {
   const service = createSupabaseServiceClient();
   const title = String(formData.get("title") ?? file.name);
   const alt = String(formData.get("alt") ?? title);
-  const galleryGroup = String(formData.get("gallery_group") ?? "general");
+  const { id: galleryGroup, label: groupLabel } = resolveGalleryGroupFromForm(formData);
   const sortOrder = Number(formData.get("sort_order") ?? 99);
   const isFeatured = formData.get("is_featured") === "on";
+
+  await ensureGalleryGroup(service, galleryGroup, groupLabel);
   const ext = file.name.split(".").pop();
   const path = `${Date.now()}-${slugify(file.name.replace(/\.[^.]+$/, ""))}.${ext}`;
 
@@ -196,6 +219,21 @@ export async function uploadMediaAction(formData: FormData) {
   revalidatePath("/admin/media");
 }
 
+export async function createGalleryGroupAction(formData: FormData) {
+  await requireAdmin();
+  const label = String(formData.get("label") ?? "").trim();
+  if (!label) {
+    redirect("/admin/media?error=" + encodeURIComponent("Escribe un nombre para el apartado."));
+  }
+
+  const service = createSupabaseServiceClient();
+  const id = slugify(label);
+  await ensureGalleryGroup(service, id, label);
+  await logChange("media", label, "Apartado de galería creado");
+  revalidatePath("/admin/media");
+  revalidatePath("/");
+}
+
 export async function updateMediaLibraryAction(formData: FormData) {
   await requireAdmin();
   const service = createSupabaseServiceClient();
@@ -204,6 +242,7 @@ export async function updateMediaLibraryAction(formData: FormData) {
   for (const id of ids) {
     const isFeatured = formData.get(`is_featured_${id}`) === "on";
     const galleryGroup = String(formData.get(`gallery_group_${id}`) ?? "general");
+    await ensureGalleryGroup(service, galleryGroup, humanizeGalleryGroupId(galleryGroup));
 
     if (isFeatured) {
       await service

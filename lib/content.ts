@@ -1,4 +1,5 @@
 import { cache } from "react";
+import { getGalleryGroups } from "@/lib/gallery-groups";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import type { ChangeLog, ContentEntry, MediaAsset, Service } from "@/lib/types";
 
@@ -26,10 +27,13 @@ export const getPublishedSiteData = cache(async () => {
     content.set(`${entry.section}.${entry.key}`, entry.published_value ?? "");
   }
 
+  const galleryGroups = await getGalleryGroups();
+
   return {
     content,
     services: (services ?? []) as Service[],
-    media: (media ?? []) as MediaAsset[]
+    media: (media ?? []) as MediaAsset[],
+    galleryGroups
   };
 });
 

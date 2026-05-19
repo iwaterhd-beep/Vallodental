@@ -3,13 +3,15 @@
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import { ChevronIcon } from "@/components/site/site-icons";
+import { galleryGroupLayoutClass, type GalleryGroup } from "@/lib/gallery-groups.shared";
 import type { MediaAsset } from "@/lib/types";
 
 type GallerySectionProps = {
   media: MediaAsset[];
+  galleryGroups: GalleryGroup[];
 };
 
-export function GallerySection({ media }: GallerySectionProps) {
+export function GallerySection({ media, galleryGroups }: GallerySectionProps) {
   const [activeGroup, setActiveGroup] = useState<string | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -25,16 +27,21 @@ export function GallerySection({ media }: GallerySectionProps) {
       }, {});
   }, [media]);
 
-  const labImages = groups.laboratorio ?? [];
-  const protesisImages = groups.protesis ?? [];
-  const generalImages = groups.general ?? [];
+  const tiles = useMemo(() => {
+    const ordered = [...galleryGroups].sort(
+      (a, b) => a.sortOrder - b.sortOrder || a.label.localeCompare(b.label, "es")
+    );
 
-  const tiles = [
-    pickFeatured(labImages),
-    pickFeatured(protesisImages),
-    generalImages[0],
-    generalImages[1]
-  ].filter(Boolean) as MediaAsset[];
+    return ordered
+      .filter((group) => group.id !== "general")
+      .map((group, index) => {
+        const images = groups[group.id] ?? [];
+        const item = pickFeatured(images);
+        if (!item) return null;
+        return { group, item, index };
+      })
+      .filter(Boolean) as { group: GalleryGroup; item: MediaAsset; index: number }[];
+  }, [galleryGroups, groups]);
 
   const activeImages = activeGroup ? groups[activeGroup] ?? [] : [];
   const activeImage = activeImages[activeIndex];
@@ -60,25 +67,22 @@ export function GallerySection({ media }: GallerySectionProps) {
   return (
     <>
       <div className="gallery-grid">
-        {tiles.map((item, index) => {
-          const group = item.gallery_group ?? "general";
-          return (
-            <button
-              className={`gallery-item reveal ${index === 0 ? "tall gallery-lab-main" : ""} ${index === 1 ? "gallery-protesis-main" : ""} ${index === 3 ? "wide" : ""}`}
-              key={item.id}
-              type="button"
-              onClick={() => {
-                setActiveGroup(group);
-                setActiveIndex(Math.max(0, (groups[group] ?? []).findIndex((image) => image.id === item.id)));
-              }}
-            >
-              <Image src={item.url} alt={item.alt} width={900} height={900} />
-              <div className="gallery-overlay">
-                <span className="gallery-overlay-label">{item.title}</span>
-              </div>
-            </button>
-          );
-        })}
+        {tiles.map(({ group, item, index }) => (
+          <button
+            className={galleryGroupLayoutClass(group, index)}
+            key={item.id}
+            type="button"
+            onClick={() => {
+              setActiveGroup(group.id);
+              setActiveIndex(Math.max(0, (groups[group.id] ?? []).findIndex((image) => image.id === item.id)));
+            }}
+          >
+            <Image src={item.url} alt={item.alt} width={900} height={900} />
+            <div className="gallery-overlay">
+              <span className="gallery-overlay-label">{group.label}</span>
+            </div>
+          </button>
+        ))}
       </div>
 
       <div

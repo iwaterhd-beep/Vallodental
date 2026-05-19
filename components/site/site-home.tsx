@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { bool, text } from "@/lib/content";
+import type { GalleryGroup } from "@/lib/gallery-groups.shared";
 import type { MediaAsset, Service } from "@/lib/types";
 import { GallerySection } from "@/components/site/gallery-section";
 import { ContactItem, ContactSocialIcon, InstagramIcon, ServiceCardIcon } from "@/components/site/site-icons";
@@ -9,9 +10,10 @@ type SiteHomeProps = {
   content: Map<string, string | boolean>;
   services: Service[];
   media: MediaAsset[];
+  galleryGroups: GalleryGroup[];
 };
 
-export function SiteHome({ content, services, media }: SiteHomeProps) {
+export function SiteHome({ content, services, media, galleryGroups }: SiteHomeProps) {
   return (
     <>
       <div className="cursor" id="cursor" />
@@ -147,7 +149,7 @@ export function SiteHome({ content, services, media }: SiteHomeProps) {
             {text(content, "gallery.link")}
           </a>
         </div>
-        <GallerySection media={media} />
+        <GallerySection media={media} galleryGroups={galleryGroups} />
         <div className="gallery-footer reveal">
           <span className="gallery-footer-text">{text(content, "gallery.footer")}</span>
           <a href={text(content, "social.instagram")} target="_blank" rel="noreferrer" className="gallery-footer-ig">

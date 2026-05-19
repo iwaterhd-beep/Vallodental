@@ -1,14 +1,16 @@
 import Image from "next/image";
-import { deleteMediaAction, updateMediaLibraryAction } from "@/lib/actions/admin";
+import { createGalleryGroupAction, deleteMediaAction, updateMediaLibraryAction } from "@/lib/actions/admin";
 import { getAdminData } from "@/lib/content";
+import { getGalleryGroups } from "@/lib/gallery-groups";
 import { DeleteButton } from "@/components/admin/delete-button";
+import { GalleryGroupSelect } from "@/components/admin/gallery-group-select";
 import { MediaUpload } from "@/components/admin/media-upload";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 
 export default async function MediaPage({ searchParams }: { searchParams: { error?: string } }) {
-  const { media } = await getAdminData();
+  const [{ media }, galleryGroups] = await Promise.all([getAdminData(), getGalleryGroups()]);
   const sortedMedia = [...media].sort((a, b) => {
     const group = (a.gallery_group ?? "general").localeCompare(b.gallery_group ?? "general");
     if (group !== 0) return group;
@@ -17,6 +19,33 @@ export default async function MediaPage({ searchParams }: { searchParams: { erro
 
   return (
     <div className="grid gap-6">
+      <Card>
+        <CardHeader>
+          <CardTitle>Apartados de la galería</CardTitle>
+          <CardDescription>
+            Laboratorio, prótesis fija, diseño 3D, estética dental… Crea los apartados que necesites para la web.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="grid gap-4">
+          <ul className="flex flex-wrap gap-2">
+            {galleryGroups.map((group) => (
+              <li
+                className="rounded-full border border-border bg-background/60 px-3 py-1 text-xs text-muted-foreground"
+                key={group.id}
+              >
+                {group.label}
+              </li>
+            ))}
+          </ul>
+          <form action={createGalleryGroupAction} className="flex flex-col gap-2 sm:flex-row">
+            <Input name="label" placeholder="Nuevo apartado (ej. Estética dental)" required />
+            <Button className="shrink-0" type="submit" variant="secondary">
+              Crear apartado
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
+
       <Card>
         <CardHeader>
           <CardTitle>Gestión de imágenes</CardTitle>
@@ -28,7 +57,7 @@ export default async function MediaPage({ searchParams }: { searchParams: { erro
               {searchParams.error}
             </p>
           ) : null}
-          <MediaUpload />
+          <MediaUpload groups={galleryGroups} />
         </CardContent>
       </Card>
 
@@ -58,15 +87,12 @@ export default async function MediaPage({ searchParams }: { searchParams: { erro
                   <Input name={`alt_${item.id}`} defaultValue={item.alt} />
                 </div>
                 <div className="grid gap-3 md:grid-cols-[1fr_90px]">
-                  <select
-                    className="h-10 rounded-md border border-input bg-background/80 px-3 text-sm"
+                  <GalleryGroupSelect
+                    groups={galleryGroups}
                     name={`gallery_group_${item.id}`}
                     defaultValue={item.gallery_group ?? "general"}
-                  >
-                    <option value="laboratorio">Laboratorio</option>
-                    <option value="protesis">Prótesis</option>
-                    <option value="general">General</option>
-                  </select>
+                    showCreate={false}
+                  />
                   <Input name={`sort_order_${item.id}`} defaultValue={item.sort_order ?? 99} type="number" />
                 </div>
                 <label className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -74,7 +100,9 @@ export default async function MediaPage({ searchParams }: { searchParams: { erro
                   Principal de su grupo
                 </label>
                 <Input readOnly value={item.url} />
-                <Button className="w-fit" variant="secondary">Guardar imagen</Button>
+                <Button className="w-fit" type="submit" variant="secondary">
+                  Guardar imagen
+                </Button>
               </form>
               <form action={deleteMediaAction}>
                 <input name="id" type="hidden" value={item.id} />
