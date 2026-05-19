@@ -2,6 +2,7 @@ import Image from "next/image";
 import { bool, text } from "@/lib/content";
 import type { MediaAsset, Service } from "@/lib/types";
 import { GallerySection } from "@/components/site/gallery-section";
+import { ContactItem, ContactSocialIcon, InstagramIcon, ServiceCardIcon } from "@/components/site/site-icons";
 import { SiteInteractions } from "@/components/site/site-interactions";
 
 type SiteHomeProps = {
@@ -83,9 +84,7 @@ export function SiteHome({ content, services, media }: SiteHomeProps) {
           {services.map((service, index) => (
             <div className="service-card reveal" data-num={String(index + 1).padStart(2, "0")} key={service.id}>
               <div className="service-num">{String(index + 1).padStart(2, "0")}</div>
-              {service.icon_url ? (
-                <Image className="service-icon service-icon-protesis" src={service.icon_url} alt="" width={90} height={90} />
-              ) : null}
+              <ServiceCardIcon iconUrl={service.icon_url} index={index} />
               <h3 className="service-name" dangerouslySetInnerHTML={{ __html: service.title }} />
               <p className="service-desc">{service.description}</p>
               <span className="service-arrow">→</span>
@@ -151,7 +150,8 @@ export function SiteHome({ content, services, media }: SiteHomeProps) {
         <GallerySection media={media} />
         <div className="gallery-footer reveal">
           <span className="gallery-footer-text">{text(content, "gallery.footer")}</span>
-          <a href={text(content, "social.instagram")} target="_blank" className="gallery-footer-ig">
+          <a href={text(content, "social.instagram")} target="_blank" rel="noreferrer" className="gallery-footer-ig">
+            <InstagramIcon />
             @{text(content, "social.instagram_handle")}
           </a>
         </div>
@@ -236,124 +236,5 @@ export function SiteHome({ content, services, media }: SiteHomeProps) {
         <p className="footer-copy">{text(content, "footer.copy")}</p>
       </footer>
     </>
-  );
-}
-
-type ContactIconKind = "phone" | "email" | "address" | "hours";
-
-function ContactItem({
-  icon,
-  label,
-  value,
-  href
-}: {
-  icon: ContactIconKind;
-  label: string;
-  value: string;
-  href?: string;
-}) {
-  return (
-    <div className="contact-detail-item reveal">
-      <div className="contact-detail-icon">
-        <ContactDetailIcon kind={icon} />
-      </div>
-      <div>
-        <div className="contact-detail-label">{label}</div>
-        {href ? (
-          <a href={href} className="contact-detail-value">
-            {value}
-          </a>
-        ) : (
-          <span className="contact-detail-value" style={{ cursor: "default", whiteSpace: "pre-line" }}>
-            {value}
-          </span>
-        )}
-      </div>
-    </div>
-  );
-}
-
-function ContactDetailIcon({ kind }: { kind: ContactIconKind }) {
-  const stroke = "#c9a96e";
-  const props = {
-    width: 14,
-    height: 14,
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke,
-    strokeWidth: 1.5,
-    strokeLinecap: "round" as const
-  };
-
-  if (kind === "phone") {
-    return (
-      <svg {...props}>
-        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.07 1.18 2 2 0 012.03 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z" />
-      </svg>
-    );
-  }
-
-  if (kind === "email") {
-    return (
-      <svg {...props}>
-        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-        <polyline points="22,6 12,13 2,6" />
-      </svg>
-    );
-  }
-
-  if (kind === "address") {
-    return (
-      <svg {...props}>
-        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
-        <circle cx="12" cy="10" r="3" />
-      </svg>
-    );
-  }
-
-  return (
-    <svg {...props}>
-      <circle cx="12" cy="12" r="10" />
-      <polyline points="12,6 12,12 16,14" />
-    </svg>
-  );
-}
-
-function ContactSocialIcon({ kind }: { kind: "instagram" | "linkedin" | "whatsapp" }) {
-  const stroke = "#c9a96e";
-  const props = {
-    width: 16,
-    height: 16,
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke,
-    strokeWidth: 1.5,
-    strokeLinecap: "round" as const
-  };
-
-  if (kind === "instagram") {
-    return (
-      <svg {...props}>
-        <rect x="2" y="2" width="20" height="20" rx="5" />
-        <circle cx="12" cy="12" r="4" />
-        <circle cx="17.5" cy="6.5" r="1" fill="#c9a96e" stroke="none" />
-      </svg>
-    );
-  }
-
-  if (kind === "linkedin") {
-    return (
-      <svg {...props}>
-        <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" />
-        <rect x="2" y="9" width="4" height="12" />
-        <circle cx="4" cy="4" r="2" />
-      </svg>
-    );
-  }
-
-  return (
-    <svg {...props}>
-      <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
-    </svg>
   );
 }

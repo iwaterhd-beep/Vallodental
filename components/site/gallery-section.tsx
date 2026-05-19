@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
+import { ChevronIcon } from "@/components/site/site-icons";
 import type { MediaAsset } from "@/lib/types";
 
 type GallerySectionProps = {
@@ -97,7 +98,7 @@ export function GallerySection({ media }: GallerySectionProps) {
             onClick={() => setActiveIndex((index) => wrap(index - 1, activeImages.length))}
             aria-label="Imagen anterior"
           >
-            ‹
+            <ChevronIcon direction="left" />
           </button>
         ) : null}
         {activeImage ? (
@@ -116,7 +117,7 @@ export function GallerySection({ media }: GallerySectionProps) {
             onClick={() => setActiveIndex((index) => wrap(index + 1, activeImages.length))}
             aria-label="Imagen siguiente"
           >
-            ›
+            <ChevronIcon direction="right" />
           </button>
         ) : null}
       </div>
