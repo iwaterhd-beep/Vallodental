@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alfredo Vallo Dental — Laboratorio Dental Sevilla</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Cursor personalizado -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- ═══════════════════ NAV ═══════════════════ -->
+  <nav id="navbar">
+    <a href="#" class="nav-logo">
+      <span class="nav-logo-top">Alfredo Vallo Dental</span>
+      <span class="nav-logo-bottom">Laboratorio dental· Implantes </span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#tecnologia">Tecnología</a></li>
+      <li><a href="#trabajos">Trabajos</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+
+    <a href="#contacto" class="nav-cta">Consultar</a>
+  </nav>
+
+  <!-- ═══════════════════ HERO ═══════════════════ -->
+  <section id="hero">
+    <!-- Columna izquierda — texto -->
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <div class="hero-eyebrow-line"></div>
+        <span class="hero-eyebrow-text">Laboratorio dental especializado</span>
+      </div>
+
+      <h1 class="hero-title">
+        Pequeños detalles,<br>
+        <em>grandes sonrisas.</em>
+      </h1>
+
+      <p class="hero-sub">
+        Fusionamos técnicas analógicas clásicas con diseño biofuncional
+        CAD 3D e Inteligencia Artificial. Prótesis de precisión excepcional,
+        creadas en Sevilla.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#trabajos" class="btn-gold">Ver trabajos</a>
+        <a href="#contacto" class="btn-ghost">Contactar</a>
+      </div>
+    </div>
+
+    <!-- Columna derecha — FOTO PRINCIPAL -->
+    <div class="hero-right">
+      <img src="https://static.wixstatic.com/media/aca030_c3d4df8430f040f9a2e65c4b80077a66~mv2.jpg" alt="Laboratorio Alfredo Vallo Dental — trabajo de prótesis" />
+    </div>
+  </section>
+
+  <!-- ═══════════════════ STATS ═══════════════════ -->
+  <div id="stats">
+    <div class="stat-item reveal">
+      <div class="stat-number">+20</div>
+      <div class="stat-label">Años de experiencia</div>
+    </div>
+    <div class="stat-item reveal" style="transition-delay: 0.1s">
+      <div class="stat-number">100%</div>
+      <div class="stat-label">Imágenes reales, sin filtros</div>
+    </div>
+    <div class="stat-item reveal" style="transition-delay: 0.2s">
+      <div class="stat-number stat-number--long">CAD-CAM · IA</div>
+      <div class="stat-label">Tecnología de vanguardia</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ SERVICIOS ═══════════════════ -->
+  <section id="servicios">
+
+    <div class="section-header">
+      <div class="section-header-left reveal">
+        <div class="section-eyebrow">
+          <div class="section-eyebrow-line"></div>
+          <span class="section-eyebrow-text">Nuestras soluciones</span>
+        </div>
+        <h2 class="section-title">
+          ¿En qué podemos<br><em>ayudarte?</em>
+        </h2>
+      </div>
+      <a href="#contacto" class="section-link reveal" style="transition-delay:0.15s">Consultar sin compromiso</a>
+    </div>
+
+    <div class="services-grid">
+
+      <!-- Card 01 — Prótesis fija -->
+      <div class="service-card reveal" data-num="01" style="transition-delay:0.05s">
+        <div class="service-num">01</div>
+        <img class="service-icon service-icon-protesis" src="./assets/icono-protesis-fija.png" alt="Icono de prótesis fija" />
+        <h3 class="service-name">Prótesis<br>fija</h3>
+        <p class="service-desc">Coronas, puentes, carillas y restauraciones estéticas en metal-cerámica, circonio y disilicato.
+          Ajuste preciso, caracterización personalizada y acabados naturales para casos anteriores y posteriores.</p>
+        <span class="service-arrow">→</span>
+      </div>
+
+      <!-- Card 02 — Diseño e impresión 3D -->
+      <div class="service-card reveal" data-num="02" style="transition-delay:0.1s">
+        <div class="service-num">02</div>
+        <img class="service-icon service-icon-diseno" src="./assets/icono-diseno-3d.png" alt="Icono diseño e impresión 3D" />
+        <h3 class="service-name">Diseño e<br>impresión 3D</h3>
+        <p class="service-desc">Diseño CAD 3D, modelos, provisionales, férulas, guías y estructuras digitales.
+          Flujo preciso para clínicas que buscan rapidez, repetibilidad y control en cada fase del caso.</p>
+        <span class="service-arrow">→</span>
+      </div>
+
+      <!-- Card 03 — Implantes -->
+      <div class="service-card reveal" data-num="03" style="transition-delay:0.15s">
+        <div class="service-num">03</div>
+        <img class="service-icon service-icon-implante" src="./assets/icono-implantes.png" alt="Icono implantes y superestructuras" />
+        <h3 class="service-name">Implantes y<br>superestructuras</h3>
+        <p class="service-desc">Coronas, puentes, barras blenders y estructuras sobre implantes con planificación digital y control de ajuste.
+          Trabajamos orientados a la estabilidad, la pasividad y la predictibilidad protésica.</p>
+        <span class="service-arrow">→</span>
+      </div>
+
+      <!-- Card 04 — Cursos y formaciones -->
+      <div class="service-card reveal" data-num="04" style="transition-delay:0.2s">
+        <div class="service-num">04</div>
+        <img class="service-icon service-icon-retenedores" src="./assets/icono-retenedores.png" alt="Icono cursos y formaciones" />
+        <h3 class="service-name">Cursos, colaboraciones<br>y formaciones</h3>
+        <p class="service-desc">Formación práctica para estudiantes, técnicos y clínicas: estética, caracterización, digitalización,
+          prótesis sobre implantes y protocolos de laboratorio aplicados a casos reales.</p>
+        <span class="service-arrow">→</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════ MARQUEE ═══════════════════ -->
+  <div class="marquee-band">
+    <div class="marquee-track">
+      <div class="marquee-item">Laboratorio dental<span>·</span></div>
+      <div class="marquee-item">Prótesis fija<span>·</span></div>
+      <div class="marquee-item">Óxido de circonio<span>·</span></div>
+      <div class="marquee-item">Metal-cerámica<span>·</span></div>
+      <div class="marquee-item">Diseño CAD 3D<span>·</span></div>
+      <div class="marquee-item">Inteligencia artificial<span>·</span></div>
+      <div class="marquee-item">Implantes<span>·</span></div>
+      <div class="marquee-item">Cursos, colaboraciones y formaciones<span>·</span></div>
+      <div class="marquee-item">Estética dental<span>·</span></div>
+      <div class="marquee-item">Laboratorio Sevilla<span>·</span></div>
+      <!-- repeat for seamless loop -->
+      <div class="marquee-item">Laboratorio dental<span>·</span></div>
+      <div class="marquee-item">Prótesis fija<span>·</span></div>
+      <div class="marquee-item">Óxido de circonio<span>·</span></div>
+      <div class="marquee-item">Metal-cerámica<span>·</span></div>
+      <div class="marquee-item">Diseño CAD 3D<span>·</span></div>
+      <div class="marquee-item">Inteligencia artificial<span>·</span></div>
+      <div class="marquee-item">Implantes<span>·</span></div>
+      <div class="marquee-item">Cursos, colaboraciones y formaciones<span>·</span></div>
+      <div class="marquee-item">Estética dental<span>·</span></div>
+      <div class="marquee-item">Laboratorio Sevilla<span>·</span></div>
+      
+    </div>
+  </div>
+
+  <!-- ═══════════════════ TECNOLOGÍA ═══════════════════ -->
+  <section id="tecnologia">
+    <div class="tech-layout">
+
+      <!-- Columna izquierda — cita y filosofía -->
+      <div class="tech-left">
+        <span class="tech-quote-mark reveal">"</span>
+
+        <blockquote class="tech-quote reveal" style="transition-delay:0.1s">
+          Trabajo real,<br>precisión visible.<br>
+          <em>Cada pieza cuenta.</em>
+        </blockquote>
+
+        <p class="tech-body reveal" style="transition-delay:0.2s">
+          Todas las imágenes que ves en esta web corresponden a trabajos realizados
+          en nuestro laboratorio. No usamos bancos de imágenes ni resultados ficticios:
+          mostramos casos reales, acabados reales y el nivel de detalle que entregamos a cada clínica.
+        </p>
+
+        <div class="tech-signature reveal" style="transition-delay:0.3s">
+          <div class="tech-signature-avatar">AV</div>
+          <div>
+            <div class="tech-signature-name">Alfredo Vallo</div>
+            <div class="tech-signature-role">Protésico dental · Sevilla</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Columna derecha — 3 pilares tecnológicos -->
+      <div class="tech-right">
+
+        <div class="tech-pillar reveal" style="transition-delay:0.05s">
+          <div class="tech-pillar-num">I</div>
+          <div class="tech-pillar-content">
+            <div class="tech-pillar-title">
+              Técnicas analógicas clásicas
+              <div class="tech-pillar-dot"></div>
+            </div>
+            <p class="tech-pillar-desc">
+              En nuestro laboratorio, la esencia del trabajo artesanal convive con 
+              la tecnología de última generación. Utilizamos herramientas digitales
+              para mejorar la planificación, el ajuste y la precisión,
+              sin renunciar a técnicas tradicionales, la caracterización y la estratificación manual.
+              Así conseguimos prótesis más exactas, naturales.
+            </p>
+          </div>
+        </div>
+
+        <div class="tech-pillar reveal" style="transition-delay:0.12s">
+          <div class="tech-pillar-num">II</div>
+          <div class="tech-pillar-content">
+            <div class="tech-pillar-title">
+              Diseño biofuncional CAD 3D
+              <div class="tech-pillar-dot"></div>
+            </div>
+            <p class="tech-pillar-desc">
+              Integramos flujos de trabajo digitales completos: escáner de alta resolución,
+              software de diseño biofuncional y fresado de precisión en circonio,
+              PMMA y resinas de última generación.
+            </p>
+          </div>
+        </div>
+
+        <div class="tech-pillar reveal" style="transition-delay:0.2s">
+          <div class="tech-pillar-num">III</div>
+          <div class="tech-pillar-content">
+            <div class="tech-pillar-title">
+              Inteligencia artificial aplicada
+              <div class="tech-pillar-dot"></div>
+            </div>
+            <p class="tech-pillar-desc">
+              La IA no sustituye al técnico: nos ayuda a analizar, comparar y optimizar.
+               Utilizamos herramientas digitales avanzadas para apoyar el diseño, revisar proporciones,
+                mejorar flujos de trabajo y tomar decisiones más precisas en cada caso.</p>
+          </div>
+        </div>
+
+        <div class="tech-pillar reveal" style="transition-delay:0.28s">
+          <div class="tech-pillar-num">IV</div>
+          <div class="tech-pillar-content">
+            <div class="tech-pillar-title">
+              Criterio en cada material
+              <div class="tech-pillar-dot"></div>
+            </div>
+            <p class="tech-pillar-desc">
+              Metal-cerámica, circonio monolítico, disilicato de litio, PMMA o resinas:
+              cada caso necesita una indicación distinta. Te ayudamos a elegir la solución más estable,
+              estética y predecible según espacio, oclusión, soporte y objetivo del paciente.
+
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ GALERÍA ═══════════════════ -->
+  <section id="trabajos">
+
+    <div class="gallery-header">
+      <div class="reveal">
+        <div class="section-eyebrow">
+          <div class="section-eyebrow-line"></div>
+          <span class="section-eyebrow-text">Nuestros trabajos</span>
+        </div>
+        <h2 class="section-title" style="color: var(--dark);">
+          Imágenes reales,<br><em>sin filtros.</em>
+        </h2>
+      </div>
+      <a href="https://www.instagram.com/alfredovallo/" target="_blank" class="section-link reveal" style="transition-delay:0.15s; color: var(--text-dim);">Ver más en Instagram</a>
+    </div>
+
+    <!--
+      INSTRUCCIONES GALERÍA:
+      Reemplaza cada <img src="..."> con la ruta de tu foto local.
+
+      Distribución:
+        Foto 1 (tall — toda la altura izquierda): foto vertical del laboratorio o proceso
+        Foto 2 (top-center):  detalle de corona o puente terminado
+        Foto 3 (top-right):   detalle de circonio o impresión 3D
+        Foto 4 (wide — abajo centro+derecha): foto panorámica de varios trabajos
+    -->
+    <div class="gallery-grid">
+
+      <!-- Foto 1 — Grande izquierda (tall) -->
+      <div class="gallery-item tall gallery-lab-main reveal" style="transition-delay:0.05s">
+        <img
+          src="./assets/lab-1.png"
+          alt="Laboratorio dental digital"
+        />
+        <div class="gallery-overlay">
+          <span class="gallery-overlay-label">Laboratorio</span>
+        </div>
+      </div>
+
+      <!-- Foto 2 — Centro arriba -->
+      <div class="gallery-item gallery-protesis-main reveal" style="transition-delay:0.1s">
+        <img src="./assets/protesis-1.png" alt="Detalle de prótesis dental — corona" />
+        <div class="gallery-overlay">
+          <span class="gallery-overlay-label">Prótesis fija</span>
+        </div>
+      </div>
+
+      <!-- Foto 3 — Derecha arriba -->
+      <div class="gallery-item reveal" style="transition-delay:0.15s">
+        <img src="https://static.wixstatic.com/media/aca030_1546d01a94e94f3a8bf4ea0d0ed2d7b2~mv2.jpg" alt="Diseño e impresión 3D dental" />
+        <div class="gallery-overlay">
+          <span class="gallery-overlay-label">Diseño 3D</span>
+        </div>
+      </div>
+
+      <!-- Foto 4 — Wide abajo (ocupa columnas 2 y 3) -->
+      <div class="gallery-item wide reveal" style="transition-delay:0.2s">
+        <img src="https://static.wixstatic.com/media/aca030_7c5b259dce80487da7dd64ee897cb7ca~mv2.png" alt="Trabajos de estética dental — Alfredo Vallo" />
+        <div class="gallery-overlay">
+          <span class="gallery-overlay-label">Estética dental</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="gallery-footer reveal">
+      <span class="gallery-footer-text">"Cada imagen, un trabajo real de nuestro laboratorio."</span>
+      <a href="https://www.instagram.com/alfredovallo/" target="_blank" class="gallery-footer-ig">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/>
+        </svg>
+        @alfredovallo
+      </a>
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════ CONTACTO ═══════════════════ -->
+  <section id="contacto">
+    <div class="contact-layout">
+
+      <!-- Izquierda — datos de contacto -->
+      <div class="contact-left">
+        <div class="section-eyebrow reveal">
+          <div class="section-eyebrow-line"></div>
+          <span class="section-eyebrow-text">Hablemos</span>
+        </div>
+
+        <h2 class="contact-title reveal" style="transition-delay:0.1s">
+          Un sinfín<br>de <em>soluciones.</em>
+        </h2>
+
+        <p class="contact-subtitle reveal" style="transition-delay:0.2s">
+          Cuéntanos tu caso. Estaremos encantados de asesorarte
+          sin compromiso sobre la mejor solución para tu clínica.
+        </p>
+
+        <div class="contact-details">
+          <div class="contact-detail-item reveal" style="transition-delay:0.25s">
+            <div class="contact-detail-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5" stroke-linecap="round">
+                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.07 1.18 2 2 0 012.03 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="contact-detail-label">Teléfono</div>
+              <a href="tel:+34655232333" class="contact-detail-value">+34 655 232 333</a>
+            </div>
+          </div>
+
+          <div class="contact-detail-item reveal" style="transition-delay:0.3s">
+            <div class="contact-detail-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5" stroke-linecap="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </div>
+            <div>
+              <div class="contact-detail-label">Email</div>
+              <a href="mailto:avrprotesicodental@gmail.com" class="contact-detail-value">avrprotesicodental@gmail.com</a>
+            </div>
+          </div>
+
+          <div class="contact-detail-item reveal" style="transition-delay:0.35s">
+            <div class="contact-detail-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5" stroke-linecap="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+            </div>
+            <div>
+              <div class="contact-detail-label">Dirección</div>
+              <span class="contact-detail-value" style="cursor:default">
+                C/ José de la Cámara, 4, local C<br>
+                <span style="font-size:12px; color:#555;">41018 · Sevilla</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-social reveal" style="transition-delay:0.4s">
+          <a href="https://www.instagram.com/alfredovallo/" target="_blank" class="contact-social-link" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5" stroke-linecap="round">
+              <rect x="2" y="2" width="20" height="20" rx="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r="1" fill="#c9a96e" stroke="none"/>
+            </svg>
+          </a>
+          <a href="http://www.linkedin.com/in/alfredo-r-vallo-7aa45a155" target="_blank" class="contact-social-link" aria-label="LinkedIn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5" stroke-linecap="round">
+              <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/>
+              <rect x="2" y="9" width="4" height="12"/>
+              <circle cx="4" cy="4" r="2"/>
+            </svg>
+          </a>
+          <a href="https://wa.me/34655232333" target="_blank" class="contact-social-link" aria-label="WhatsApp">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5" stroke-linecap="round">
+              <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Derecha — formulario -->
+      <div class="contact-right">
+        <div class="reveal">
+          <div class="section-eyebrow" style="margin-bottom:32px">
+            <div class="section-eyebrow-line"></div>
+            <span class="section-eyebrow-text">Formulario de contacto</span>
+          </div>
+        </div>
+
+        <form id="contactForm" novalidate>
+          <div class="form-row reveal" style="transition-delay:0.1s">
+            <div class="form-label-group">
+              <label class="form-label" for="nombre">Nombre</label>
+              <input class="form-input" type="text" id="nombre" name="nombre" placeholder="Tu nombre" required />
+            </div>
+            <div class="form-label-group">
+              <label class="form-label" for="clinica">Clínica / empresa</label>
+              <input class="form-input" type="text" id="clinica" name="clinica" placeholder="Nombre de tu clínica" />
+            </div>
+          </div>
+
+          <div class="form-row reveal" style="transition-delay:0.15s">
+            <div class="form-label-group">
+              <label class="form-label" for="email">Email</label>
+              <input class="form-input" type="email" id="email" name="email" placeholder="tu@email.com" required />
+            </div>
+            <div class="form-label-group">
+              <label class="form-label" for="telefono">Teléfono</label>
+              <input class="form-input" type="tel" id="telefono" name="telefono" placeholder="+34 000 000 000" />
+            </div>
+          </div>
+
+          <div class="form-label-group reveal" style="transition-delay:0.2s">
+            <label class="form-label" for="servicio">Servicio de interés</label>
+            <input class="form-input" type="text" id="servicio" name="servicio" placeholder="Prótesis fija, implantes, diseño 3D, cursos…" />
+          </div>
+
+          <div class="form-label-group reveal" style="transition-delay:0.25s">
+            <label class="form-label" for="mensaje">Mensaje</label>
+            <textarea class="form-textarea" id="mensaje" name="mensaje" placeholder="Cuéntanos tu caso o consulta…"></textarea>
+          </div>
+
+          <div class="form-submit reveal" style="transition-delay:0.3s">
+            <button type="submit" class="form-submit-btn">Enviar consulta →</button>
+            <p class="form-note">Respuesta en menos<br>de 24 horas.</p>
+          </div>
+
+          <div class="form-status" id="formStatus"></div>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════ FOOTER ═══════════════════ -->
+  <footer>
+    <div class="footer-logo">Alfredo Vallo Dental</div>
+    <ul class="footer-links">
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#tecnologia">Tecnología</a></li>
+      <li><a href="#trabajos">Trabajos</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <p class="footer-copy">© 2025 · Laboratorio dental · Sevilla</p>
+  </footer>
+
+  <div class="lab-lightbox" id="labLightbox" aria-hidden="true">
+    <button class="lab-lightbox-close" type="button" id="labLightboxClose" aria-label="Cerrar visor">×</button>
+    <button class="lab-lightbox-nav prev" type="button" id="labLightboxPrev" aria-label="Imagen anterior">‹</button>
+    <img class="lab-lightbox-image" id="labLightboxImage" src="" alt="Imagen ampliada de laboratorio" />
+    <button class="lab-lightbox-nav next" type="button" id="labLightboxNext" aria-label="Imagen siguiente">›</button>
+  </div>
+
+  <!-- ═══════════════════ JS ═══════════════════ -->
+  <script src="main.js"></script>
+</body>
+</html>
