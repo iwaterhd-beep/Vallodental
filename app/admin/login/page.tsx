@@ -6,6 +6,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 export default function LoginPage({ searchParams }: { searchParams: { error?: string } }) {
+  const missingEnv =
+    !process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
   return (
     <main className="admin-app flex min-h-screen items-center justify-center px-4">
       <Card className="w-full max-w-md">
@@ -26,6 +29,12 @@ export default function LoginPage({ searchParams }: { searchParams: { error?: st
               <Label htmlFor="password">Contraseña</Label>
               <Input id="password" name="password" type="password" autoComplete="current-password" required />
             </div>
+            {missingEnv ? (
+              <p className="rounded-md border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">
+                Faltan variables de Supabase en Vercel: NEXT_PUBLIC_SUPABASE_URL y
+                NEXT_PUBLIC_SUPABASE_ANON_KEY.
+              </p>
+            ) : null}
             {searchParams.error ? (
               <p className="rounded-md border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">
                 {searchParams.error}
