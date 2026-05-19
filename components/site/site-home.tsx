@@ -167,10 +167,21 @@ export function SiteHome({ content, services, media }: SiteHomeProps) {
             <h2 className="contact-title reveal" dangerouslySetInnerHTML={{ __html: text(content, "contact.title") }} />
             <p className="contact-subtitle reveal">{text(content, "contact.subtitle")}</p>
             <div className="contact-details">
-              <ContactItem label={text(content, "contact.phone_label")} value={text(content, "contact.phone")} href={`tel:${text(content, "contact.phone_href")}`} />
-              <ContactItem label={text(content, "contact.email_label")} value={text(content, "contact.email")} href={`mailto:${text(content, "contact.email")}`} />
-              <ContactItem label={text(content, "contact.address_label")} value={text(content, "contact.address")} />
-              <ContactItem label={text(content, "contact.hours_label")} value={text(content, "contact.hours")} />
+              <ContactItem icon="phone" label={text(content, "contact.phone_label")} value={text(content, "contact.phone")} href={`tel:${text(content, "contact.phone_href")}`} />
+              <ContactItem icon="email" label={text(content, "contact.email_label")} value={text(content, "contact.email")} href={`mailto:${text(content, "contact.email")}`} />
+              <ContactItem icon="address" label={text(content, "contact.address_label")} value={text(content, "contact.address")} />
+              <ContactItem icon="hours" label={text(content, "contact.hours_label")} value={text(content, "contact.hours")} />
+            </div>
+            <div className="contact-social reveal">
+              <a href={text(content, "social.instagram")} target="_blank" rel="noreferrer" className="contact-social-link" aria-label="Instagram">
+                <ContactSocialIcon kind="instagram" />
+              </a>
+              <a href={text(content, "social.linkedin")} target="_blank" rel="noreferrer" className="contact-social-link" aria-label="LinkedIn">
+                <ContactSocialIcon kind="linkedin" />
+              </a>
+              <a href={text(content, "contact.whatsapp")} target="_blank" rel="noreferrer" className="contact-social-link" aria-label="WhatsApp">
+                <ContactSocialIcon kind="whatsapp" />
+              </a>
             </div>
           </div>
           <div className="contact-right">
@@ -228,18 +239,121 @@ export function SiteHome({ content, services, media }: SiteHomeProps) {
   );
 }
 
-function ContactItem({ label, value, href }: { label: string; value: string; href?: string }) {
+type ContactIconKind = "phone" | "email" | "address" | "hours";
+
+function ContactItem({
+  icon,
+  label,
+  value,
+  href
+}: {
+  icon: ContactIconKind;
+  label: string;
+  value: string;
+  href?: string;
+}) {
   return (
     <div className="contact-detail-item reveal">
-      <div className="contact-detail-icon" />
+      <div className="contact-detail-icon">
+        <ContactDetailIcon kind={icon} />
+      </div>
       <div>
         <div className="contact-detail-label">{label}</div>
         {href ? (
-          <a href={href} className="contact-detail-value">{value}</a>
+          <a href={href} className="contact-detail-value">
+            {value}
+          </a>
         ) : (
-          <span className="contact-detail-value" style={{ cursor: "default", whiteSpace: "pre-line" }}>{value}</span>
+          <span className="contact-detail-value" style={{ cursor: "default", whiteSpace: "pre-line" }}>
+            {value}
+          </span>
         )}
       </div>
     </div>
+  );
+}
+
+function ContactDetailIcon({ kind }: { kind: ContactIconKind }) {
+  const stroke = "#c9a96e";
+  const props = {
+    width: 14,
+    height: 14,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke,
+    strokeWidth: 1.5,
+    strokeLinecap: "round" as const
+  };
+
+  if (kind === "phone") {
+    return (
+      <svg {...props}>
+        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.07 1.18 2 2 0 012.03 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z" />
+      </svg>
+    );
+  }
+
+  if (kind === "email") {
+    return (
+      <svg {...props}>
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+        <polyline points="22,6 12,13 2,6" />
+      </svg>
+    );
+  }
+
+  if (kind === "address") {
+    return (
+      <svg {...props}>
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+        <circle cx="12" cy="10" r="3" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg {...props}>
+      <circle cx="12" cy="12" r="10" />
+      <polyline points="12,6 12,12 16,14" />
+    </svg>
+  );
+}
+
+function ContactSocialIcon({ kind }: { kind: "instagram" | "linkedin" | "whatsapp" }) {
+  const stroke = "#c9a96e";
+  const props = {
+    width: 16,
+    height: 16,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke,
+    strokeWidth: 1.5,
+    strokeLinecap: "round" as const
+  };
+
+  if (kind === "instagram") {
+    return (
+      <svg {...props}>
+        <rect x="2" y="2" width="20" height="20" rx="5" />
+        <circle cx="12" cy="12" r="4" />
+        <circle cx="17.5" cy="6.5" r="1" fill="#c9a96e" stroke="none" />
+      </svg>
+    );
+  }
+
+  if (kind === "linkedin") {
+    return (
+      <svg {...props}>
+        <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" />
+        <rect x="2" y="9" width="4" height="12" />
+        <circle cx="4" cy="4" r="2" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg {...props}>
+      <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
+    </svg>
   );
 }
