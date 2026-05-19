@@ -1,0 +1,5 @@
+# Archivos de la web estática antigua (confunden el deploy en Vercel)
+/index.html
+/main.js
+/styles.css
+/assets/
