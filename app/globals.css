@@ -41,6 +41,22 @@
   --input: 0 0% 16%;
   --ring: 39 46% 61%;
   --radius: 0.85rem;
+  --admin-bg-end: #101010;
+  --admin-gold-glow: rgba(201, 169, 110, 0.14);
+  --admin-sidebar-border: rgba(255, 255, 255, 0.1);
+  --admin-sidebar-bg: rgba(0, 0, 0, 0.35);
+  --admin-nav-color: var(--text-muted);
+  --admin-nav-color-hover: var(--text-light);
+  --admin-nav-icon-bg: rgba(255, 255, 255, 0.05);
+  --admin-session-border: rgba(255, 255, 255, 0.1);
+  --admin-session-bg: rgba(10, 10, 10, 0.88);
+  --admin-session-shadow: 0 22px 70px rgba(0, 0, 0, 0.22);
+  --admin-header-border: rgba(255, 255, 255, 0.1);
+  --admin-header-bg: rgba(8, 8, 8, 0.84);
+  --admin-hero-bg: linear-gradient(135deg, rgba(201, 169, 110, 0.13), rgba(17, 17, 17, 0.94) 48%, rgba(12, 12, 12, 0.98));
+  --admin-status-border: rgba(255, 255, 255, 0.1);
+  --admin-status-bg: rgba(0, 0, 0, 0.22);
+  --admin-divider-border: rgba(255, 255, 255, 0.1);
 }
 
 .light {
@@ -48,6 +64,8 @@
   --foreground: 0 0% 5%;
   --card: 42 37% 97%;
   --card-foreground: 0 0% 7%;
+  --primary: 39 46% 48%;
+  --primary-foreground: 42 37% 98%;
   --secondary: 40 27% 91%;
   --secondary-foreground: 0 0% 8%;
   --muted: 40 24% 90%;
@@ -56,6 +74,26 @@
   --accent-foreground: 0 0% 8%;
   --border: 40 16% 82%;
   --input: 40 16% 82%;
+  --destructive: 0 72% 48%;
+  --destructive-foreground: 0 0% 100%;
+  --text-muted: #5c5c5c;
+  /* Admin panel — modo claro */
+  --admin-bg-end: #ebe4d8;
+  --admin-gold-glow: rgba(201, 169, 110, 0.28);
+  --admin-sidebar-border: rgba(0, 0, 0, 0.08);
+  --admin-sidebar-bg: rgba(255, 255, 255, 0.78);
+  --admin-nav-color: #5c5c5c;
+  --admin-nav-color-hover: #141414;
+  --admin-nav-icon-bg: rgba(201, 169, 110, 0.14);
+  --admin-session-border: rgba(0, 0, 0, 0.08);
+  --admin-session-bg: rgba(255, 255, 255, 0.95);
+  --admin-session-shadow: 0 18px 50px rgba(0, 0, 0, 0.08);
+  --admin-header-border: rgba(0, 0, 0, 0.08);
+  --admin-header-bg: rgba(255, 255, 255, 0.9);
+  --admin-hero-bg: linear-gradient(135deg, rgba(201, 169, 110, 0.2), rgba(255, 255, 255, 0.98) 48%, rgba(248, 245, 239, 1));
+  --admin-status-border: rgba(0, 0, 0, 0.08);
+  --admin-status-bg: rgba(255, 255, 255, 0.75);
+  --admin-divider-border: rgba(0, 0, 0, 0.08);
 }
 
 html { scroll-behavior: smooth; font-size: 16px; }
@@ -75,8 +113,8 @@ body {
 .admin-app {
   min-height: 100vh;
   background:
-    radial-gradient(circle at top left, rgba(201,169,110,0.14), transparent 34rem),
-    linear-gradient(135deg, hsl(var(--background)), #101010);
+    radial-gradient(circle at top left, var(--admin-gold-glow), transparent 34rem),
+    linear-gradient(135deg, hsl(var(--background)), var(--admin-bg-end));
   color: hsl(var(--foreground));
 }
 
@@ -91,8 +129,8 @@ body {
   flex-direction: column;
   min-height: 100vh;
   padding: 32px 28px;
-  border-right: 1px solid rgba(255,255,255,0.1);
-  background: rgba(0,0,0,0.35);
+  border-right: 1px solid var(--admin-sidebar-border);
+  background: var(--admin-sidebar-bg);
   backdrop-filter: blur(28px);
   -webkit-backdrop-filter: blur(28px);
 }
@@ -139,7 +177,7 @@ body {
   border: 1px solid transparent;
   border-radius: 18px;
   background: transparent;
-  color: var(--text-muted);
+  color: var(--admin-nav-color);
   text-decoration: none;
   transition: border-color 0.25s var(--ease), background 0.25s var(--ease), color 0.25s var(--ease), transform 0.25s var(--ease);
 }
@@ -149,7 +187,7 @@ body {
   transform: translateX(3px);
   border-color: rgba(201,169,110,0.25);
   background: rgba(201,169,110,0.1);
-  color: var(--text-light);
+  color: var(--admin-nav-color-hover);
 }
 
 .admin-nav-link.is-active {
@@ -164,17 +202,17 @@ body {
   align-items: center;
   justify-content: center;
   border-radius: 14px;
-  background: rgba(255,255,255,0.05);
+  background: var(--admin-nav-icon-bg);
   color: var(--gold);
 }
 
 .admin-session {
   margin-top: auto;
   padding: 22px;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid var(--admin-session-border);
   border-radius: 22px;
-  background: rgba(10,10,10,0.88);
-  box-shadow: 0 22px 70px rgba(0,0,0,0.22);
+  background: var(--admin-session-bg);
+  box-shadow: var(--admin-session-shadow);
 }
 
 .admin-session-name {
@@ -194,8 +232,8 @@ body {
   position: sticky;
   top: 0;
   z-index: 20;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  background: rgba(8,8,8,0.84);
+  border-bottom: 1px solid var(--admin-header-border);
+  background: var(--admin-header-bg);
   backdrop-filter: blur(28px);
   -webkit-backdrop-filter: blur(28px);
 }
@@ -238,7 +276,7 @@ body {
 .admin-hero-card {
   overflow: hidden;
   border-color: rgba(201,169,110,0.18) !important;
-  background: linear-gradient(135deg, rgba(201,169,110,0.13), rgba(17,17,17,0.94) 48%, rgba(12,12,12,0.98)) !important;
+  background: var(--admin-hero-bg) !important;
 }
 
 .admin-hero-card-content {
@@ -267,9 +305,9 @@ body {
 
 .admin-status-card {
   padding: 28px;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid var(--admin-status-border);
   border-radius: 24px;
-  background: rgba(0,0,0,0.22);
+  background: var(--admin-status-bg);
   align-self: stretch;
 }
 
@@ -348,7 +386,7 @@ body {
   .admin-sidebar {
     min-height: auto;
     border-right: 0;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid var(--admin-divider-border);
   }
 
   .admin-hero-card-content,

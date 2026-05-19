@@ -1,4 +1,5 @@
 import { ShieldCheck } from "lucide-react";
+import { ThemeToggle } from "@/components/admin/theme-toggle";
 import { loginAction } from "@/lib/actions/admin";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -10,7 +11,10 @@ export default function LoginPage({ searchParams }: { searchParams: { error?: st
     !process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
   return (
-    <main className="admin-app flex min-h-screen items-center justify-center px-4">
+    <main className="admin-app relative flex min-h-screen items-center justify-center px-4">
+      <div className="absolute right-4 top-4 z-10">
+        <ThemeToggle />
+      </div>
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-primary/30 bg-primary/10 text-primary">
