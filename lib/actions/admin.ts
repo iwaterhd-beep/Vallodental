@@ -58,8 +58,16 @@ export async function saveContentAction(formData: FormData) {
   const supabase = createSupabaseServerClient();
   const ids = formData.getAll("entry_id").map(String);
 
+  const { data: entryMeta } = await supabase.from("content_entries").select("id, type").in("id", ids);
+  const typeById = new Map((entryMeta ?? []).map((row) => [row.id as string, row.type as string]));
+
   for (const id of ids) {
-    const value = String(formData.get(`value_${id}`) ?? "");
+    const raw = formData.get(`value_${id}`);
+    const entryType = typeById.get(id);
+    const value =
+      entryType === "boolean"
+        ? raw === "on" || raw === "true"
+        : String(raw ?? "");
     await supabase
       .from("content_entries")
       .update({ draft_value: value, updated_at: new Date().toISOString() })
@@ -159,7 +167,16 @@ export async function uploadMediaAction(formData: FormData) {
     .from("site-media")
     .upload(path, file, { upsert: true, contentType: file.type });
 
-  if (error) throw error;
+  if (error) {
+    redirect(`/admin/media?error=${encodeURIComponent(error.message)}`);
+  }
+
+  if (isFeatured) {
+    await service
+      .from("media_assets")
+      .update({ is_featured: false })
+      .eq("gallery_group", galleryGroup);
+  }
 
   const { data } = service.storage.from("site-media").getPublicUrl(path);
   await service.from("media_assets").insert({

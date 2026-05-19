@@ -144,11 +144,17 @@ body {
   transition: border-color 0.25s var(--ease), background 0.25s var(--ease), color 0.25s var(--ease), transform 0.25s var(--ease);
 }
 
-.admin-nav-link:hover {
+.admin-nav-link:hover,
+.admin-nav-link.is-active {
   transform: translateX(3px);
   border-color: rgba(201,169,110,0.25);
   background: rgba(201,169,110,0.1);
   color: var(--text-light);
+}
+
+.admin-nav-link.is-active {
+  border-color: rgba(201,169,110,0.4);
+  background: rgba(201,169,110,0.16);
 }
 
 .admin-nav-icon {

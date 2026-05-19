@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 
-export default async function MediaPage() {
+export default async function MediaPage({ searchParams }: { searchParams: { error?: string } }) {
   const { media } = await getAdminData();
   const sortedMedia = [...media].sort((a, b) => {
     const group = (a.gallery_group ?? "general").localeCompare(b.gallery_group ?? "general");
@@ -22,10 +22,23 @@ export default async function MediaPage() {
           <CardTitle>Gestión de imágenes</CardTitle>
           <CardDescription>Subida con drag & drop, preview y almacenamiento en Supabase Storage.</CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="grid gap-4">
+          {searchParams.error ? (
+            <p className="rounded-md border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">
+              {searchParams.error}
+            </p>
+          ) : null}
           <MediaUpload />
         </CardContent>
       </Card>
+
+      {!sortedMedia.length ? (
+        <Card>
+          <CardContent className="p-8 text-center text-sm text-muted-foreground">
+            Todavía no hay imágenes en la biblioteca. Sube la primera desde el formulario de arriba.
+          </CardContent>
+        </Card>
+      ) : null}
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {sortedMedia.map((item) => (

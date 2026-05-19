@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { UploadCloud } from "lucide-react";
 import { uploadMediaAction } from "@/lib/actions/admin";
 import { Button } from "@/components/ui/button";
@@ -9,6 +9,11 @@ import { Input } from "@/components/ui/input";
 export function MediaUpload() {
   const [preview, setPreview] = useState<string | null>(null);
   const [fileName, setFileName] = useState("");
+  const [title, setTitle] = useState("");
+
+  useEffect(() => {
+    if (fileName) setTitle(fileName.replace(/\.[^.]+$/, ""));
+  }, [fileName]);
 
   return (
     <form action={uploadMediaAction} className="grid gap-4 rounded-xl border border-dashed border-primary/40 bg-primary/5 p-5">
@@ -48,7 +53,7 @@ export function MediaUpload() {
         <img src={preview} alt="Preview" className="h-56 w-full rounded-xl object-cover" />
       ) : null}
       <div className="grid gap-3 md:grid-cols-2">
-        <Input name="title" placeholder="Título interno" defaultValue={fileName} />
+        <Input name="title" placeholder="Título interno" value={title} onChange={(event) => setTitle(event.target.value)} />
         <Input name="alt" placeholder="Texto alternativo SEO" />
       </div>
       <div className="grid gap-3 md:grid-cols-[1fr_120px_160px]">

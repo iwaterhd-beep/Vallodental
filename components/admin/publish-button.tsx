@@ -16,8 +16,12 @@ export function PublishButton() {
       onClick={() => {
         if (!confirm("¿Publicar todos los borradores en la web?")) return;
         startTransition(async () => {
-          await publishContentAction();
-          toast.success("Cambios publicados");
+          try {
+            await publishContentAction();
+            toast.success("Cambios publicados en la web");
+          } catch {
+            toast.error("No se pudieron publicar los cambios");
+          }
         });
       }}
     >
