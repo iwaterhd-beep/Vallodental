@@ -17,8 +17,11 @@ const body = DM_Sans({
   variable: "--font-body"
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://vallodental.vercel.app";
+
 export const metadata: Metadata = {
-  title: "Alfredo Vallo Dental",
+  metadataBase: new URL(siteUrl),
+  title: "Vallo Dental",
   description: "Laboratorio dental especializado en Sevilla"
 };
 

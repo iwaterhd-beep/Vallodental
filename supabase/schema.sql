@@ -201,7 +201,7 @@ values
 ('social','instagram','Instagram URL','url','"https://www.instagram.com/alfredovallo/"','"https://www.instagram.com/alfredovallo/"',100,now()),
 ('social','instagram_handle','Instagram usuario','text','"alfredovallo"','"alfredovallo"',101,now()),
 ('social','linkedin','LinkedIn URL','url','"http://www.linkedin.com/in/alfredo-r-vallo-7aa45a155"','"http://www.linkedin.com/in/alfredo-r-vallo-7aa45a155"',102,now()),
-('footer','copy','Copyright footer','text','"© 2025 · Laboratorio dental · Sevilla"','"© 2025 · Laboratorio dental · Sevilla"',110,now())
+('footer','copy','Copyright footer','text','"© 2026 Vallo Dental. Todos los derechos reservados."','"© 2026 Vallo Dental. Todos los derechos reservados."',110,now())
 on conflict (section, key) do update set
 label = excluded.label,
 type = excluded.type,

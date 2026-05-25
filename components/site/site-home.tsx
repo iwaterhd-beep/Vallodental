@@ -2,9 +2,11 @@ import Image from "next/image";
 import { bool, text } from "@/lib/content";
 import type { GalleryGroup } from "@/lib/gallery-groups.shared";
 import type { MediaAsset, Service } from "@/lib/types";
+import { ContactForm } from "@/components/site/contact-form";
 import { GallerySection } from "@/components/site/gallery-section";
 import { ContactItem, ContactSocialIcon, InstagramIcon, ServiceCardIcon } from "@/components/site/site-icons";
 import { SiteInteractions } from "@/components/site/site-interactions";
+import { SiteNav } from "@/components/site/site-nav";
 
 type SiteHomeProps = {
   content: Map<string, string | boolean>;
@@ -14,26 +16,27 @@ type SiteHomeProps = {
 };
 
 export function SiteHome({ content, services, media, galleryGroups }: SiteHomeProps) {
+  const navLinks = [
+    { href: "#servicios", label: text(content, "nav.services") },
+    { href: "#tecnologia", label: text(content, "nav.technology") },
+    { href: "#trabajos", label: text(content, "nav.work") },
+    { href: "#contacto", label: text(content, "nav.contact") }
+  ];
+
   return (
     <>
       <div className="cursor" id="cursor" />
       <div className="cursor-ring" id="cursorRing" />
       <SiteInteractions />
 
-      <nav id="navbar">
-        <a href="#" className="nav-logo">
-          <span className="nav-logo-top">{text(content, "brand.name")}</span>
-          <span className="nav-logo-bottom">{text(content, "brand.tagline")}</span>
-        </a>
-        <ul className="nav-links">
-          <li><a href="#servicios">{text(content, "nav.services")}</a></li>
-          <li><a href="#tecnologia">{text(content, "nav.technology")}</a></li>
-          <li><a href="#trabajos">{text(content, "nav.work")}</a></li>
-          <li><a href="#contacto">{text(content, "nav.contact")}</a></li>
-        </ul>
-        <a href="#contacto" className="nav-cta">{text(content, "nav.cta")}</a>
-      </nav>
+      <SiteNav
+        brandName={text(content, "brand.name")}
+        brandTagline={text(content, "brand.tagline")}
+        links={navLinks}
+        ctaLabel={text(content, "nav.cta")}
+      />
 
+      <main id="contenido-principal">
       <section id="hero">
         <div className="hero-left">
           <div className="hero-eyebrow">
@@ -145,7 +148,7 @@ export function SiteHome({ content, services, media, galleryGroups }: SiteHomePr
             </div>
             <h2 className="section-title" style={{ color: "var(--dark)" }} dangerouslySetInnerHTML={{ __html: text(content, "gallery.title") }} />
           </div>
-          <a href={text(content, "social.instagram")} target="_blank" className="section-link reveal" style={{ color: "var(--text-dim)" }}>
+          <a href={text(content, "social.instagram")} target="_blank" rel="noreferrer" className="section-link reveal" style={{ color: "var(--text-dim)" }}>
             {text(content, "gallery.link")}
           </a>
         </div>
@@ -171,7 +174,12 @@ export function SiteHome({ content, services, media, galleryGroups }: SiteHomePr
             <div className="contact-details">
               <ContactItem icon="phone" label={text(content, "contact.phone_label")} value={text(content, "contact.phone")} href={`tel:${text(content, "contact.phone_href")}`} />
               <ContactItem icon="email" label={text(content, "contact.email_label")} value={text(content, "contact.email")} href={`mailto:${text(content, "contact.email")}`} />
-              <ContactItem icon="address" label={text(content, "contact.address_label")} value={text(content, "contact.address")} />
+              <ContactItem
+                icon="address"
+                label={text(content, "contact.address_label")}
+                value={text(content, "contact.address")}
+                href="https://maps.google.com/?q=C.+Jos%C3%A9+de+la+C%C3%A1mara,+4,+41018+Sevilla"
+              />
               <ContactItem icon="hours" label={text(content, "contact.hours_label")} value={text(content, "contact.hours")} />
             </div>
             <div className="contact-social reveal">
@@ -193,49 +201,66 @@ export function SiteHome({ content, services, media, galleryGroups }: SiteHomePr
                 <span className="section-eyebrow-text">{text(content, "contact.form_eyebrow")}</span>
               </div>
             </div>
-            <form action={`mailto:${text(content, "contact.email")}`} method="post" encType="text/plain">
-              <div className="form-row reveal">
-                <div className="form-label-group">
-                  <label className="form-label" htmlFor="nombre">Nombre</label>
-                  <input className="form-input" id="nombre" name="nombre" placeholder="Tu nombre" required />
-                </div>
-                <div className="form-label-group">
-                  <label className="form-label" htmlFor="clinica">Clínica / empresa</label>
-                  <input className="form-input" id="clinica" name="clinica" placeholder="Nombre de tu clínica" />
-                </div>
-              </div>
-              <div className="form-row reveal">
-                <div className="form-label-group">
-                  <label className="form-label" htmlFor="email">Email</label>
-                  <input className="form-input" id="email" name="email" placeholder="tu@email.com" required type="email" />
-                </div>
-                <div className="form-label-group">
-                  <label className="form-label" htmlFor="telefono">Teléfono</label>
-                  <input className="form-input" id="telefono" name="telefono" placeholder="+34 000 000 000" />
-                </div>
-              </div>
-              <div className="form-label-group reveal">
-                <label className="form-label" htmlFor="mensaje">Mensaje</label>
-                <textarea className="form-textarea" id="mensaje" name="mensaje" placeholder="Cuéntanos tu caso o consulta..." />
-              </div>
-              <div className="form-submit reveal">
-                <button type="submit" className="form-submit-btn">{text(content, "contact.submit")}</button>
-                <p className="form-note" dangerouslySetInnerHTML={{ __html: text(content, "contact.note") }} />
-              </div>
-            </form>
+            <ContactForm
+              recipientEmail={text(content, "contact.email")}
+              submitLabel={text(content, "contact.submit")}
+              noteHtml={text(content, "contact.note")}
+              serviceOptions={services.map((service) => service.title)}
+            />
           </div>
         </div>
       </section>
+      </main>
 
-      <footer>
-        <div className="footer-logo">{text(content, "brand.name")}</div>
-        <ul className="footer-links">
-          <li><a href="#servicios">{text(content, "nav.services")}</a></li>
-          <li><a href="#tecnologia">{text(content, "nav.technology")}</a></li>
-          <li><a href="#trabajos">{text(content, "nav.work")}</a></li>
-          <li><a href="#contacto">{text(content, "nav.contact")}</a></li>
-        </ul>
-        <p className="footer-copy">{text(content, "footer.copy")}</p>
+      <footer className="site-footer" role="contentinfo">
+        <div className="footer-inner">
+          <div className="footer-brand">
+            <p className="footer-logo">Vallo Dental</p>
+            <p className="footer-tagline">Laboratorio dental · Sevilla</p>
+          </div>
+
+          <div className="footer-block footer-contact">
+            <p className="footer-heading">Contacto rápido</p>
+            <ul className="footer-list">
+              <li>
+                <a href={`tel:${text(content, "contact.phone_href")}`} className="footer-link">
+                  <span className="footer-link-label">{text(content, "contact.phone_label")}</span>
+                  {text(content, "contact.phone")}
+                </a>
+              </li>
+              <li>
+                <a href={`mailto:${text(content, "contact.email")}`} className="footer-link">
+                  <span className="footer-link-label">{text(content, "contact.email_label")}</span>
+                  {text(content, "contact.email")}
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <nav className="footer-block footer-nav" aria-label="Navegación del sitio">
+            <p className="footer-heading">Navegación</p>
+            <ul className="footer-list">
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <a href={link.href} className="footer-link">{link.label}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <nav className="footer-block footer-legal" aria-label="Información legal">
+            <p className="footer-heading">Legal</p>
+            <ul className="footer-list">
+              <li><a href="/aviso-legal.html" className="footer-link">Aviso legal</a></li>
+              <li><a href="/politica-privacidad.html" className="footer-link">Política de privacidad</a></li>
+              <li><a href="/politica-cookies.html" className="footer-link">Política de cookies</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <div className="footer-bottom">
+          <p className="footer-copy">© 2026 Vallo Dental. Todos los derechos reservados.</p>
+        </div>
       </footer>
     </>
   );
