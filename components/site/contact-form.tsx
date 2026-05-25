@@ -39,7 +39,7 @@ export function ContactForm({ recipientEmail, submitLabel, noteHtml, serviceOpti
         setStatus({ type: "success", text: result.message });
         form.reset();
 
-        if (result.message.includes("cliente de correo")) {
+        if (result.mode === "mailto") {
           const body = [
             `Nombre: ${mailtoBody.name}`,
             `Clínica: ${mailtoBody.clinic}`,

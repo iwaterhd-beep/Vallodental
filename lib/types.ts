@@ -43,3 +43,14 @@ export type ChangeLog = {
   action: string;
   created_at: string;
 };
+
+export type ContactSubmission = {
+  id: string;
+  name: string;
+  clinic: string | null;
+  email: string;
+  phone: string | null;
+  service_interest: string | null;
+  message: string | null;
+  created_at: string;
+};

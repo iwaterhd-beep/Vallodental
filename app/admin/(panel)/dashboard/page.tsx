@@ -1,10 +1,14 @@
-import { Activity, FileText, ImageIcon, Sparkles } from "lucide-react";
-import { getAdminData } from "@/lib/content";
+import Link from "next/link";
+import { Activity, FileText, ImageIcon, Mail, Sparkles } from "lucide-react";
+import { getAdminData, getContactSubmissions } from "@/lib/content";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default async function DashboardPage() {
-  const { entries, services, media, changes } = await getAdminData();
+  const [{ entries, services, media, changes }, { submissions }] = await Promise.all([
+    getAdminData(),
+    getContactSubmissions()
+  ]);
   const drafts = entries.filter((entry) => entry.draft_value !== entry.published_value).length;
 
   return (
@@ -33,6 +37,19 @@ export default async function DashboardPage() {
         <Metric icon={Sparkles} label="Borradores pendientes" value={drafts} />
         <Metric icon={Activity} label="Servicios" value={services.length} />
         <Metric icon={ImageIcon} label="Imágenes" value={media.length} />
+        <Link className="block" href="/admin/contact">
+          <Card className="admin-metric-card transition hover:border-primary/40">
+            <CardContent className="admin-metric-content">
+              <div className="admin-metric-icon">
+                <Mail className="h-6 w-6" />
+              </div>
+              <div>
+                <p className="admin-metric-value">{submissions.length}</p>
+                <p className="admin-metric-label">Consultas web</p>
+              </div>
+            </CardContent>
+          </Card>
+        </Link>
       </div>
       <Card className="admin-history-card">
         <CardHeader>

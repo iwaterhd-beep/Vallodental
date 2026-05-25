@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BarChart3, FileText, ImageIcon, Settings } from "lucide-react";
+import { BarChart3, FileText, ImageIcon, Mail, Settings } from "lucide-react";
 
 const links = [
   { href: "/admin/dashboard", label: "Dashboard", icon: BarChart3 },
+  { href: "/admin/contact", label: "Consultas", icon: Mail },
   { href: "/admin/content", label: "Contenido", icon: FileText },
   { href: "/admin/media", label: "Media", icon: ImageIcon },
   { href: "/admin/settings", label: "Ajustes", icon: Settings }

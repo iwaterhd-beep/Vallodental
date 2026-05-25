@@ -1,7 +1,7 @@
 import { cache } from "react";
 import { getGalleryGroups } from "@/lib/gallery-groups";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
-import type { ChangeLog, ContentEntry, MediaAsset, Service } from "@/lib/types";
+import type { ChangeLog, ContactSubmission, ContentEntry, MediaAsset, Service } from "@/lib/types";
 
 export const getPublishedSiteData = cache(async () => {
   const supabase = createSupabaseServerClient();
@@ -65,6 +65,24 @@ export async function getAdminData() {
     media: (media ?? []) as MediaAsset[],
     changes: (changes ?? []) as ChangeLog[]
   };
+}
+
+export async function getContactSubmissions() {
+  const supabase = createSupabaseServerClient();
+  const { data, error } = await supabase
+    .from("contact_submissions")
+    .select("*")
+    .order("created_at", { ascending: false })
+    .limit(50);
+
+  if (error) {
+    if (error.code === "PGRST205") {
+      return { submissions: [] as ContactSubmission[], setupRequired: true };
+    }
+    return { submissions: [] as ContactSubmission[], setupRequired: false, error: error.message };
+  }
+
+  return { submissions: (data ?? []) as ContactSubmission[], setupRequired: false };
 }
 
 export function text(content: Map<string, string | boolean>, key: string) {
