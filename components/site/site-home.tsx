@@ -212,55 +212,19 @@ export function SiteHome({ content, services, media, galleryGroups }: SiteHomePr
       </section>
       </main>
 
-      <footer className="site-footer" role="contentinfo">
-        <div className="footer-inner">
-          <div className="footer-brand">
-            <p className="footer-logo">Vallo Dental</p>
-            <p className="footer-tagline">Laboratorio dental · Sevilla</p>
-          </div>
-
-          <div className="footer-block footer-contact">
-            <p className="footer-heading">Contacto rápido</p>
-            <ul className="footer-list">
-              <li>
-                <a href={`tel:${text(content, "contact.phone_href")}`} className="footer-link">
-                  <span className="footer-link-label">{text(content, "contact.phone_label")}</span>
-                  {text(content, "contact.phone")}
-                </a>
-              </li>
-              <li>
-                <a href={`mailto:${text(content, "contact.email")}`} className="footer-link">
-                  <span className="footer-link-label">{text(content, "contact.email_label")}</span>
-                  {text(content, "contact.email")}
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <nav className="footer-block footer-nav" aria-label="Navegación del sitio">
-            <p className="footer-heading">Navegación</p>
-            <ul className="footer-list">
-              {navLinks.map((link) => (
-                <li key={link.href}>
-                  <a href={link.href} className="footer-link">{link.label}</a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          <nav className="footer-block footer-legal" aria-label="Información legal">
-            <p className="footer-heading">Legal</p>
-            <ul className="footer-list">
-              <li><a href="/aviso-legal.html" className="footer-link">Aviso legal</a></li>
-              <li><a href="/politica-privacidad.html" className="footer-link">Política de privacidad</a></li>
-              <li><a href="/politica-cookies.html" className="footer-link">Política de cookies</a></li>
-            </ul>
-          </nav>
-        </div>
-
-        <div className="footer-bottom">
-          <p className="footer-copy">© 2026 Vallo Dental. Todos los derechos reservados.</p>
-        </div>
+      <footer>
+        <div className="footer-logo">{text(content, "brand.name")}</div>
+        <ul className="footer-links">
+          {navLinks.map((link) => (
+            <li key={link.href}>
+              <a href={link.href}>{link.label}</a>
+            </li>
+          ))}
+          <li><a href="/aviso-legal.html">Aviso legal</a></li>
+          <li><a href="/politica-privacidad.html">Privacidad</a></li>
+          <li><a href="/politica-cookies.html">Cookies</a></li>
+        </ul>
+        <p className="footer-copy">{text(content, "footer.copy")}</p>
       </footer>
     </>
   );
