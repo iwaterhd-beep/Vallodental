@@ -109,7 +109,7 @@ export function ContactForm({ recipientEmail, submitLabel, noteHtml, serviceOpti
         <label className="form-label" htmlFor="mensaje">
           Mensaje
         </label>
-        <textarea className="form-textarea" id="mensaje" name="mensaje" placeholder="Cuéntanos tu caso o consulta..." rows={5} />
+        <textarea className="form-textarea" id="mensaje" name="mensaje" placeholder="contáctanos" rows={5} />
       </div>
       <label className="form-privacy reveal">
         <input name="privacy" type="checkbox" required />
