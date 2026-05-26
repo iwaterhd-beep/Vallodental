@@ -234,6 +234,51 @@ export async function createGalleryGroupAction(formData: FormData) {
   revalidatePath("/");
 }
 
+export async function updateGalleryGroupAction(formData: FormData) {
+  await requireAdmin();
+  const id = String(formData.get("id") ?? "").trim();
+  const label = String(formData.get("label") ?? "").trim();
+  if (!id || !label) {
+    redirect("/admin/media?error=" + encodeURIComponent("Indica el apartado y su nuevo nombre."));
+  }
+
+  const service = createSupabaseServiceClient();
+  const { data: existing } = await service.from("gallery_groups").select("sort_order, layout").eq("id", id).maybeSingle();
+
+  await service.from("gallery_groups").upsert(
+    {
+      id,
+      label,
+      sort_order: existing?.sort_order ?? 50,
+      layout: existing?.layout ?? "normal"
+    },
+    { onConflict: "id" }
+  );
+
+  await logChange("media", label, "Apartado de galería actualizado");
+  revalidatePath("/admin/media");
+  revalidatePath("/");
+}
+
+export async function deleteGalleryGroupAction(formData: FormData) {
+  await requireAdmin();
+  const id = String(formData.get("id") ?? "").trim();
+  if (!id) {
+    redirect("/admin/media?error=" + encodeURIComponent("Apartado no válido."));
+  }
+  if (id === "general") {
+    redirect("/admin/media?error=" + encodeURIComponent("No puedes eliminar el apartado General."));
+  }
+
+  const service = createSupabaseServiceClient();
+  await service.from("media_assets").update({ gallery_group: "general" }).eq("gallery_group", id);
+  await service.from("gallery_groups").delete().eq("id", id);
+
+  await logChange("media", id, "Apartado de galería eliminado");
+  revalidatePath("/admin/media");
+  revalidatePath("/");
+}
+
 export async function updateMediaLibraryAction(formData: FormData) {
   await requireAdmin();
   const service = createSupabaseServiceClient();

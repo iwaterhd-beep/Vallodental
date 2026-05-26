@@ -3,7 +3,11 @@
 import { Trash2 } from "lucide-react";
 import { Button, type ButtonProps } from "@/components/ui/button";
 
-export function DeleteButton({ label = "Borrar", ...props }: { label?: string } & ButtonProps) {
+export function DeleteButton({
+  label = "Borrar",
+  confirmMessage = "¿Seguro que quieres borrar este elemento? Esta acción no se puede deshacer.",
+  ...props
+}: { label?: string; confirmMessage?: string } & ButtonProps) {
   return (
     <Button
       type="submit"
@@ -12,7 +16,7 @@ export function DeleteButton({ label = "Borrar", ...props }: { label?: string } 
       className="gap-2"
       {...props}
       onClick={(event) => {
-        if (!confirm("¿Seguro que quieres borrar este elemento? Esta acción no se puede deshacer.")) {
+        if (!confirm(confirmMessage)) {
           event.preventDefault();
         }
         props.onClick?.(event);

@@ -3,6 +3,7 @@ import { createGalleryGroupAction, deleteMediaAction, updateMediaLibraryAction }
 import { getAdminData } from "@/lib/content";
 import { getGalleryGroups } from "@/lib/gallery-groups";
 import { DeleteButton } from "@/components/admin/delete-button";
+import { GalleryGroupList } from "@/components/admin/gallery-group-list";
 import { GalleryGroupSelect } from "@/components/admin/gallery-group-select";
 import { MediaUpload } from "@/components/admin/media-upload";
 import { Button } from "@/components/ui/button";
@@ -17,6 +18,12 @@ export default async function MediaPage({ searchParams }: { searchParams: { erro
     return (a.sort_order ?? 99) - (b.sort_order ?? 99);
   });
 
+  const imageCounts = media.reduce<Record<string, number>>((acc, item) => {
+    const groupId = item.gallery_group ?? "general";
+    acc[groupId] = (acc[groupId] ?? 0) + 1;
+    return acc;
+  }, {});
+
   return (
     <div className="grid gap-6">
       <Card>
@@ -27,16 +34,7 @@ export default async function MediaPage({ searchParams }: { searchParams: { erro
           </CardDescription>
         </CardHeader>
         <CardContent className="grid gap-4">
-          <ul className="flex flex-wrap gap-2">
-            {galleryGroups.map((group) => (
-              <li
-                className="rounded-full border border-border bg-background/60 px-3 py-1 text-xs text-muted-foreground"
-                key={group.id}
-              >
-                {group.label}
-              </li>
-            ))}
-          </ul>
+          <GalleryGroupList groups={galleryGroups} imageCounts={imageCounts} />
           <form action={createGalleryGroupAction} className="flex flex-col gap-2 sm:flex-row">
             <Input name="label" placeholder="Nuevo apartado (ej. Estética dental)" required />
             <Button className="shrink-0" type="submit" variant="secondary">
