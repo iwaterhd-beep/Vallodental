@@ -35,7 +35,18 @@ export function ContentField({ entry }: { entry: ContentEntry }) {
           Activado
         </label>
       ) : entry.type === "textarea" || entry.type === "richtext" ? (
-        <Textarea id={entry.id} name={name} defaultValue={defaultValue} rows={entry.type === "richtext" ? 4 : 3} />
+        <Textarea
+          id={entry.id}
+          name={name}
+          defaultValue={defaultValue}
+          rows={
+            entry.section === "legal" && entry.key.endsWith("_body")
+              ? 18
+              : entry.type === "richtext"
+                ? 4
+                : 3
+          }
+        />
       ) : (
         <Input id={entry.id} name={name} defaultValue={defaultValue} type={entry.type === "url" ? "url" : "text"} />
       )}

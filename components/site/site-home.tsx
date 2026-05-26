@@ -219,9 +219,9 @@ export function SiteHome({ content, services, media, galleryGroups }: SiteHomePr
               <a href={link.href}>{link.label}</a>
             </li>
           ))}
-          <li><a href="/aviso-legal.html">Aviso legal</a></li>
-          <li><a href="/politica-privacidad.html">Privacidad</a></li>
-          <li><a href="/politica-cookies.html">Cookies</a></li>
+          <li><a href="/aviso-legal">Aviso legal</a></li>
+          <li><a href="/politica-privacidad">Privacidad</a></li>
+          <li><a href="/politica-cookies">Cookies</a></li>
         </ul>
         <p className="footer-copy">{text(content, "footer.copy")}</p>
       </footer>

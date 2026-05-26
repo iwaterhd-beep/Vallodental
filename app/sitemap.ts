@@ -6,8 +6,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
   return [
     { url: siteUrl, lastModified, changeFrequency: "monthly", priority: 1 },
-    { url: `${siteUrl}/aviso-legal.html`, lastModified, changeFrequency: "yearly", priority: 0.3 },
-    { url: `${siteUrl}/politica-privacidad.html`, lastModified, changeFrequency: "yearly", priority: 0.3 },
-    { url: `${siteUrl}/politica-cookies.html`, lastModified, changeFrequency: "yearly", priority: 0.3 }
+    { url: `${siteUrl}/aviso-legal`, lastModified, changeFrequency: "yearly", priority: 0.3 },
+    { url: `${siteUrl}/politica-privacidad`, lastModified, changeFrequency: "yearly", priority: 0.3 },
+    { url: `${siteUrl}/politica-cookies`, lastModified, changeFrequency: "yearly", priority: 0.3 }
   ];
 }

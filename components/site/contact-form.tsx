@@ -115,7 +115,7 @@ export function ContactForm({ recipientEmail, submitLabel, noteHtml, serviceOpti
         <input name="privacy" type="checkbox" required />
         <span>
           He leído y acepto la{" "}
-          <a href="/politica-privacidad.html" target="_blank" rel="noopener noreferrer">
+          <a href="/politica-privacidad" target="_blank" rel="noopener noreferrer">
             política de privacidad
           </a>
           .

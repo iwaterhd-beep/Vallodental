@@ -10,7 +10,9 @@ import { Textarea } from "@/components/ui/textarea";
 
 export default async function ContentPage() {
   const { entries, services } = await getAdminData();
-  const contentEntries = entries.filter((entry) => !SETTINGS_SECTIONS.has(entry.section));
+  const contentEntries = entries.filter(
+    (entry) => !SETTINGS_SECTIONS.has(entry.section) && entry.section !== "legal"
+  );
   const sections = Array.from(new Set(contentEntries.map((entry) => entry.section)));
 
   return (

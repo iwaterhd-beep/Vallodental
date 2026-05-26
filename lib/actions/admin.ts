@@ -6,7 +6,15 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { createSupabaseServiceClient } from "@/lib/supabase/service";
 import { requireAdmin } from "@/lib/auth";
 import { humanizeGalleryGroupId } from "@/lib/gallery-groups.shared";
+import { LEGAL_PAGES } from "@/lib/legal-pages";
 import { slugify } from "@/lib/utils";
+
+function revalidateLegalPaths() {
+  for (const page of LEGAL_PAGES) {
+    revalidatePath(page.path);
+  }
+  revalidatePath("/admin/legal");
+}
 
 async function ensureGalleryGroup(
   client: ReturnType<typeof createSupabaseServiceClient>,
@@ -97,6 +105,8 @@ export async function saveContentAction(formData: FormData) {
 
   await logChange("content", "Contenido global", "Guardado como borrador");
   revalidatePath("/admin/content");
+  revalidatePath("/admin/legal");
+  revalidateLegalPaths();
   revalidatePath("/");
 }
 
@@ -119,6 +129,7 @@ export async function publishContentAction() {
   revalidatePath("/");
   revalidatePath("/admin/dashboard");
   revalidatePath("/admin/content");
+  revalidateLegalPaths();
 }
 
 export async function saveServicesAction(formData: FormData) {
