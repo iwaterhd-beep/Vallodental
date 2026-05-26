@@ -1604,11 +1604,69 @@ body:has(button:hover) .cursor-ring { width: 56px; height: 56px; border-color: r
 
 .form-select {
   appearance: none;
+  color-scheme: dark;
   background-image: linear-gradient(45deg, transparent 50%, var(--gold) 50%), linear-gradient(135deg, var(--gold) 50%, transparent 50%);
   background-position: calc(100% - 18px) calc(50% - 2px), calc(100% - 12px) calc(50% - 2px);
   background-size: 6px 6px, 6px 6px;
   background-repeat: no-repeat;
   padding-right: 36px;
+}
+
+.form-select-custom {
+  position: relative;
+}
+
+.form-select-trigger {
+  display: block;
+  cursor: pointer;
+  text-align: left;
+}
+
+.form-select-trigger.is-placeholder {
+  color: #555;
+}
+
+.form-select-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 30;
+  margin: 0;
+  padding: 6px 0;
+  list-style: none;
+  background: #101010;
+  border: 1px solid rgba(201, 169, 110, 0.28);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.form-select-option {
+  display: block;
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  background: transparent;
+  color: var(--text-light);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.4;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.form-select-option:hover,
+.form-select-option.is-active {
+  background: rgba(201, 169, 110, 0.14);
+  color: var(--gold-light);
+}
+
+.form-select-option:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: -2px;
 }
 
 .form-privacy {

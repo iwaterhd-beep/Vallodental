@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { submitContactAction } from "@/lib/actions/contact";
+import { ServiceSelect } from "@/components/site/service-select";
 
 type ContactFormProps = {
   recipientEmail: string;
@@ -16,6 +17,7 @@ export function ContactForm({ recipientEmail, submitLabel, noteHtml, serviceOpti
     text: ""
   });
   const [pending, startTransition] = useTransition();
+  const [selectKey, setSelectKey] = useState(0);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -38,6 +40,7 @@ export function ContactForm({ recipientEmail, submitLabel, noteHtml, serviceOpti
 
         setStatus({ type: "success", text: result.message });
         form.reset();
+        setSelectKey((key) => key + 1);
 
         if (result.mode === "mailto") {
           const body = [
@@ -96,14 +99,7 @@ export function ContactForm({ recipientEmail, submitLabel, noteHtml, serviceOpti
         <label className="form-label" htmlFor="servicio">
           Servicio de interés
         </label>
-        <select className="form-input form-select" id="servicio" name="servicio" defaultValue="">
-          <option value="">Selecciona un servicio</option>
-          {serviceOptions.map((option) => (
-            <option key={option} value={option}>
-              {option.replace(/<[^>]+>/g, " ")}
-            </option>
-          ))}
-        </select>
+        <ServiceSelect key={selectKey} id="servicio" name="servicio" options={serviceOptions} />
       </div>
       <div className="form-label-group reveal">
         <label className="form-label" htmlFor="mensaje">
