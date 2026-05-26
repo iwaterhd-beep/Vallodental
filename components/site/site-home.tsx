@@ -111,7 +111,6 @@ export function SiteHome({ content, services, media, galleryGroups }: SiteHomePr
       <section id="tecnologia">
         <div className="tech-layout">
           <div className="tech-left">
-            <span className="tech-quote-mark reveal">&quot;</span>
             <blockquote className="tech-quote reveal" dangerouslySetInnerHTML={{ __html: text(content, "tech.quote") }} />
             <p className="tech-body reveal">{text(content, "tech.body")}</p>
             <div className="tech-signature reveal">

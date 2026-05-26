@@ -1094,15 +1094,6 @@ body:has(button:hover) .cursor-ring { width: 56px; height: 56px; border-color: r
   justify-content: center;
   border-right: 1px solid var(--border-dark);
 }
-.tech-quote-mark {
-  font-family: var(--font-display);
-  font-size: 120px;
-  line-height: 0.6;
-  color: var(--gold-dim);
-  opacity: 0.4;
-  margin-bottom: 24px;
-  display: block;
-}
 .tech-quote {
   font-family: var(--font-display);
   font-size: clamp(26px, 3vw, 40px);
